@@ -29,3 +29,10 @@ body {
 
 }
 
+.preview *{
+    width: 300px;
+    border: 50px #dbf10d;
+    /*height: 50%;*/
+    
+}
+
