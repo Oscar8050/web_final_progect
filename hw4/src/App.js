@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import './styles.css'
 
-
+var global_valid_amount = 2;
 
 function App() {
   let index = 2;
+  const [valid, setValid] = useState(2);
   const [value, setValue] = useState('');
-  const [todos, setTodos] = useState([])
+  const [todos, setTodos] = useState([]);
   const enter_press = (event) => {
     if (event.keyCode === 13 && value !== '') {
       setTodos([...todos, value]);
       setValue('');
       index++;
+      global_valid_amount++;
     }
   }
   const input_content = (e) => {
@@ -30,7 +32,6 @@ function App() {
             todos != null &&
             todos.map((con) => <Item key={index} id={index++} content={con} />)
           }
-
         </ul>
       </section>
       {todos != null && <MyFooter amount={index} />}
@@ -48,10 +49,12 @@ function Item(props) {
     if (clicked === false) {
       setEffect(crossout);
       setClicked(true);
+      global_valid_amount--;
     }
     else {
       setEffect(null);
       setClicked(false);
+      global_valid_amount++;
     }
   }
   return (
@@ -60,8 +63,6 @@ function Item(props) {
         <input type='checkbox' id={props.id} onClick={ifclicked} />
         <label htmlFor={props.id} />
       </div>
-
-      {/* <h1 className='todo-app__item-detail' style={effect}> */}
       <h1 className='todo-app__item-detail' style={effect}>
         {props.content}
       </h1>
@@ -81,7 +82,7 @@ function MyFooter(props) {
   return (
     <footer className='todo-app__footer' id='todo-footer'>
       <div className='todo-app__total'>
-        {props.amount - 2} left
+        {global_valid_amount - 2} left
       </div>
     </footer>
   )
