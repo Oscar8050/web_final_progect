@@ -4,7 +4,8 @@ import './styles.css'
 var global_valid_amount = 2;
 
 function App() {
-  let index = 2;
+  let idtmp = 0;
+  const [index, setIndex] = useState(2);
   const [valid, setValid] = useState(2);
   const [value, setValue] = useState('');
   const [todos, setTodos] = useState([]);
@@ -12,13 +13,23 @@ function App() {
     if (event.keyCode === 13 && value !== '') {
       setTodos([...todos, value]);
       setValue('');
-      index++;
+      setIndex(index + 1);
       global_valid_amount++;
     }
   }
   const input_content = (e) => {
     setValue(e.target.value);
   }
+  const IndexControl = (e) => {
+    if (e === true) {
+      setIndex(index + 1);
+    }
+    else {
+      setIndex(index - 1);
+    }
+
+  }
+
   return (
     <div id="myroot" className="todo-app__root">
       <header className="todo-app__header" >
@@ -30,10 +41,11 @@ function App() {
           {/* <MyList todo = {todos}> */}
           {
             todos != null &&
-            todos.map((con) => <Item key={index} id={index++} content={con} />)
+            todos.map((con, i) => <Item key={i} id={idtmp++} content={con} indexcontrol={IndexControl} />)
           }
         </ul>
       </section>
+
       {todos != null && <MyFooter amount={index} />}
     </div>
   );
@@ -49,14 +61,15 @@ function Item(props) {
     if (clicked === false) {
       setEffect(crossout);
       setClicked(true);
-      global_valid_amount--;
+      props.indexcontrol(false);
     }
     else {
       setEffect(null);
       setClicked(false);
-      global_valid_amount++;
+      props.indexcontrol(true);
     }
   }
+
   return (
     <li className='todo-app__item'>
       <div className='todo-app__checkbox'>
@@ -69,20 +82,12 @@ function Item(props) {
     </li>
   )
 }
-function MyList(props) {
-  return (
-    <ul className="todo-app__list" id='todo_list'>
-      {
 
-      }
-    </ul>
-  )
-}
 function MyFooter(props) {
   return (
     <footer className='todo-app__footer' id='todo-footer'>
       <div className='todo-app__total'>
-        {global_valid_amount - 2} left
+        {props.amount - 2} left
       </div>
     </footer>
   )
