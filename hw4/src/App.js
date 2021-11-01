@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import './styles.css'
 
-var global_valid_amount = 2;
 
 function App() {
   let idtmp = 0;
+  const [showfooter, setShowfooter] = useState(false);
   const [index, setIndex] = useState(2);
-  const [valid, setValid] = useState(2);
   const [value, setValue] = useState('');
   const [todos, setTodos] = useState([]);
   const enter_press = (event) => {
     if (event.keyCode === 13 && value !== '') {
+
       setTodos([...todos, value]);
       setValue('');
       setIndex(index + 1);
-      global_valid_amount++;
+      setShowfooter(true);
     }
   }
   const input_content = (e) => {
@@ -40,13 +40,12 @@ function App() {
         <ul className="todo-app__list" id='todo_list'>
           {/* <MyList todo = {todos}> */}
           {
-            todos != null &&
+            todos !== [] &&
             todos.map((con, i) => <Item key={i} id={idtmp++} content={con} indexcontrol={IndexControl} />)
           }
         </ul>
       </section>
-
-      {todos != null && <MyFooter amount={index} />}
+      {showfooter && <MyFooter amount={index} />}
     </div>
   );
 }
@@ -88,6 +87,14 @@ function MyFooter(props) {
     <footer className='todo-app__footer' id='todo-footer'>
       <div className='todo-app__total'>
         {props.amount - 2} left
+      </div>
+      <ul className='todo-app__view-buttons'>
+        <button>All</button>
+        <button>Active</button>
+        <button>Completed</button>
+      </ul>
+      <div className='todo-app__clean'>
+        <button>Clear completed</button>
       </div>
     </footer>
   )
