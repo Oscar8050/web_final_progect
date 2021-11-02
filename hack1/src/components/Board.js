@@ -33,20 +33,17 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
     const freshBoard = () => {
         {/* -- TODO 3-1 -- */ }
         {/* Useful Hint: createBoard(...) */ }
-        let a = createBoard(boardSize, mineNum).board;
-        let b = createBoard(boardSize, mineNum).mineLocations;
-        console.log(...a);
-        setBoard([...a]);
+        setBoard(createBoard(boardSize, mineNum).board);
         //setBoard(createBoard(boardSize, mineNum).board)
-        setMineLocations(b);
-        console.log(board);
-        console.log(mineLocations);
+        setMineLocations(createBoard(boardSize, mineNum).mineLocations);
+
     }
 
     const restartGame = () => {
         {/* -- TODO 5-2 -- */ }
         {/* Useful Hint: freshBoard() */ }
         freshBoard();
+        setNonMineCount(0);
     }
 
     // On Right Click / Flag Cell
@@ -78,9 +75,9 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
                 {/* Reminder: Remember to use the component <Cell> and <Dashboard>. See Cell.js and Dashboard.js for detailed information. */}
                 <div className='boardContainer'>
                     <Dashboard />
-                    {/* {board.map((row, i) => <div id={'row' + i.toString()} style={{ display: 'flex' }}>
-                        {row.map((individ, j) => <Cell rowIdx={i} colIdx={j} detail={individ} updateFlag={updateFlag} revealCell={revealCell} />)}
-                    </div>)} */}
+                    {board.map((row, i) => <div key={i} id={'row' + i.toString()} style={{ display: 'flex' }}>
+                        {row.map((individ, j) => <Cell key={j} rowIdx={i} colIdx={j} detail={individ} updateFlag={updateFlag} revealCell={revealCell} />)}
+                    </div>)}
 
                 </div>
             </div>
