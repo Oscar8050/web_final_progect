@@ -1,70 +1,26 @@
-# Getting Started with Create React App
+# spec
+。原本是參考iPhone內建的計算機，但後來因種種因素只採用了他的圓形按鈕；後來又去參考了
+iPad上的app '計算機Pro'，滿喜歡它下面有把算式列出來所以決定以這種方式實作(但沒有弄小計就是了)。
+為了做出這種把算式列出來的做法，我也參考了我們平常在用的工程用計算機CASIO fx-991EX
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+。運算上支持先乘除後加減，括號內的會先算。若連續按不同運算符號(+-*/)，他只會保留最後按下的那個符號。
+比如說依序按下'+' '*' '-' '/'，則採用/當作該位置的operator。
 
-## Available Scripts
+。括號部分可以隨便按，但要小心有沒有mismatch問題，有的話會直接alert ERROR
 
-In the project directory, you can run:
+。(額外的三個運算功能)log, ln, √方面比較嚴格，前面的常數項要用'*'連接、想做運算的數值要用()包起來。如以下範例
+    8*√(9+6)+ln(5)。若沒有照前述使用則會alert ERROR
 
-### `npm start`
+。輸入字數因版面問題限定輸入14個字元，超過14個後輸入的東西皆不列入計算
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+。計算答案方面，基礎的加減乘除、log、ln、開根號基本會在全部列完，按下'='後才會算出最終結果。
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+。mc/mr/m+/m-部分也請依照上面log,ln,√使用
 
-### `npm test`
+。絕對數值很大或很小時會自動以科學記號表示
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# exception之處理
+。若給log,ln或根號輸入<0的數會告訴你NaN；log(0), ln(0), divide by 0 會噴INFINITE
 
-### `npm run build`
+。我額外加的功能都只會讓數值變小，應該是不太會overfloat
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
