@@ -1,0 +1,16 @@
+.button{
+    background-color: rgb(243, 88, 88);
+    cursor: pointer;
+    border-radius: 999em;
+    height: 60px;
+    width: 60px;
+    font-size: 20px;
+    padding: 5px;
+    font-weight: 500;
+    font-family: 'Fira Sans',sans-serif;
+
+}
+
+.button:hover{
+    opacity: 0.9;
+}
