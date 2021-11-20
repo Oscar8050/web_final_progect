@@ -9,7 +9,7 @@ function App() {
   const [hasWon, setHasWon] = useState(false);
   const [number, setNumber] = useState('');
   const [status, setStatus] = useState('');
-  const [value, setValue] = useState('');
+  //const [value, setValue] = useState('');
 
 
 
@@ -18,15 +18,22 @@ function App() {
   }
 
   const handleGuess = async () => {
-    const response = await guess(number)
-
+    const response = await guess(number, status)
     if (response === 'Equal') setHasWon(true)
     else {
       setStatus(response)
       setNumber('')
     }
   }
-
+  const handleRestart = async () => {
+    setHasWon(false);
+    setNumber('');
+    setStatus('');
+    setHasStarted(true)
+    let re = await restart();
+    if (re !== 'The game has restarted.')
+      setStatus(re);
+  }
   const starttoplay = async () => {
     setHasStarted(true)
     await startGame()
@@ -41,7 +48,7 @@ function App() {
   const gameMode =
     <>
       <p>Guess a number between 1 to 100</p>
-      <input onChange={input_content} autoFocus={true} // Get the value from input
+      <input value={number} onChange={input_content} autoFocus={true} // Get the value from input
       ></input>
       <button  // Send number to backend
         onClick={handleGuess}
@@ -53,7 +60,7 @@ function App() {
   const winningMode = (
     <>
       <p>you won! the number was {number}.</p>
-      <button  // Handle restart for backend and frontend
+      <button onClick={handleRestart}
       >restart</button>
     </>
   )

@@ -1,16 +1,12 @@
 {
   "name": "hw6",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
+  "license": "MIT",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd frontend && npm start",
-    "server": "cd backend && npm server"
+    "start": "cd frontend && yarn start",
+    "server": "cd backend && yarn server"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "axios": "^0.24.0"
   }
