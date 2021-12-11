@@ -22,10 +22,18 @@ const app = express()
 const server = http.createServer(app)
 const wss = new WebSocketServer({ server: server })
 
+const broadcastMessage = (data, status) => {
+    wss.clients.forEach((client) => {
+        sendData(data, client);
+        sendStatus(status, client);
+    });
+};
+
+
 db.once('open', () => {
     console.log('MongoDB connected!')
     wss.on('connection', async (ws) => {
-        await initData(ws);
+        initData(ws);
         ws.onmessage = async (byteString) => {
 
             const { data } = byteString
@@ -41,14 +49,16 @@ db.once('open', () => {
                         throw new Error("Message DB save error: " + e);
                     }
 
-                    sendData(['output', [payload]], ws)
-                    sendStatus({ type: 'success', msg: 'Message sent.' }, ws)
+                    // sendData(['output', [payload]], ws)
+                    // sendStatus({ type: 'success', msg: 'Message sent.' }, ws)
+                    broadcastMessage(['output', [payload]], { type: 'success', msg: 'Message sent.' })
                     break
                 }
                 case 'clear': {
                     Message.deleteMany({}, () => {
-                        sendData(['cleared'], ws)
-                        sendStatus({ type: 'info', msg: 'Message cache cleared.' }, ws)
+                        // sendData(['cleared'], ws)
+                        // sendStatus({ type: 'info', msg: 'Message cache cleared.' }, ws)
+                        broadcastMessage(['cleared'], { type: 'info', msg: 'Message cache cleared.' })
                     })
                     break
                 }

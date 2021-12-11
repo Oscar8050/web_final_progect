@@ -8,6 +8,7 @@
     "server": "cd backend && yarn server"
   },
   "dependencies": {
+    "styled-components": "^5.3.3",
     "ws": "^8.3.0"
   }
 }

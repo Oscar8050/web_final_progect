@@ -1,7 +1,19 @@
-import './App.css'
+import styled from 'styled-components'
 import { useState, useEffect, useRef } from 'react'
 import { Button, Input, Tag, message } from 'antd'
-import useChat from './useChat'
+import useChat from './Hooks/useChat'
+import Title from './Components/Title'
+import Message from './Components/Message'
+
+const Wrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 500px;
+    margin: auto;
+`
 
 function App() {
 
@@ -34,14 +46,17 @@ function App() {
 
 
   return (
-    <div className="App">
-      <div className="App-title">
+    // <div className="App">
+    <Wrapper>
+      {/* <div className="App-title"> */}
+      <Title>
         <h1>Simple Chat</h1>
         <Button type="primary" danger onClick={clearMessages}>
           Clear
         </Button>
-      </div>
-      <div className="App-messages">
+      </Title>
+      {/* <div className="App-messages"> */}
+      <Message>
         {messages.length === 0 ? (
           <p style={{ color: '#ccc' }}> No messages... </p>
         ) : (
@@ -51,7 +66,7 @@ function App() {
             </p>
           ))
         )}
-      </div>
+      </Message>
       <Input
         placeholder="Username"
         value={username}
@@ -81,7 +96,7 @@ function App() {
           setBody('')
         }}
       ></Input.Search>
-    </div>
+    </Wrapper>
   )
 }
 
