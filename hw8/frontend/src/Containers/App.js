@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import { message } from 'antd'
 import useChat from '../Hooks/useChat'
 import ChatRoom from './ChatRoom'
-
+import SignIn from './signIn'
 
 const Wrapper = styled.div`
     display: flex;
@@ -14,6 +14,8 @@ const Wrapper = styled.div`
     width: 500px;
     margin: auto;
 `
+
+const LOCALSTORAGE_KEY = "save-me";
 
 function App() {
 
@@ -36,29 +38,36 @@ function App() {
   }
 
 
+  const savedMe = localStorage.getItem(LOCALSTORAGE_KEY);
+
+
   const { status, messages, sendMessage, clearMessages } = useChat()
-  const [username, setUsername] = useState('')
   const [body, setBody] = useState('')  // textBody
+  const [me, setMe] = useState(savedMe || '')
+  const [signedIn, setSignedIn] = useState(false)
   const bodyRef = useRef(null)
+
 
   useEffect(() => { displayStatus(status) },
     [status])
 
+  useEffect(() => {
+    if (signedIn) {
+      localStorage.setItem(LOCALSTORAGE_KEY, me);
+    }
+  }, [signedIn, me]);
+
 
   return (
     <Wrapper>
-      <ChatRoom
-        status={status}
-        messages={messages}
-        sendMessage={sendMessage}
-        clearMessages={clearMessages}
-        displayStatus={displayStatus}
-        username={username}
-        setUsername={setUsername}
-        body={body}
-        setBody={setBody}
-        bodyRef={bodyRef}
-      />
+      {
+        !signedIn ? <SignIn me={me} setMe={setMe} setSignedIn={setSignedIn} displayStatus={displayStatus} /> :
+          <ChatRoom messages={messages} sendMessage={sendMessage} clearMessages={clearMessages}
+            displayStatus={displayStatus} me={me}
+            body={body} setBody={setBody} bodyRef={bodyRef}
+          />
+      }
+
     </Wrapper>
   )
 }
