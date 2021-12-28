@@ -13,7 +13,7 @@ type Task {
   id: ID!
   title: String!
   content: String!
-  dueDate: Date! # use scalar Date above
+  dueDate: Date!
   status: Status! # use enum Status above
 }
 
