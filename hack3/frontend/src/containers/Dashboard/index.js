@@ -89,6 +89,12 @@ export default function Dashboard() {
    */
   const handleUpdateTask = (id, status) => {
     // Call graphql mutation function
+    updateTask({
+      variables: {
+        id : id,
+        status : status
+      },
+    })
     // TODO 3 Use `updateTask` and pass the correct variables
   };
 

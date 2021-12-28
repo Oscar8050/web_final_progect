@@ -15,7 +15,7 @@ import { TODO } from "../../constants";
 // graphql
 import { useMutation } from "@apollo/react-hooks";
 // TODO 4.2 Uncomment the following line
-// import { GET_TASKS_QUERY, CREATE_TASK_MUTATION } from "../../graphql";
+import { GET_TASKS_QUERY, CREATE_TASK_MUTATION } from "../../graphql";
 
 const TITLE = "title";
 const CONTENT = "content";
@@ -41,28 +41,28 @@ export default function CreateTaskModal({ open, handleCloseCreateTaskModal }) {
   };
 
   // TODO 4.2 Uncomment the following lines
-  // const [createTask] = useMutation(CREATE_TASK_MUTATION);
+ const [createTask] = useMutation(CREATE_TASK_MUTATION);
   const handleCreate = () => {
     if (Object.values(formData).some((v) => !v)) {
       setDisplayError(true);
       return;
     }
     // TODO 4.2 Uncomment the following lines
-    // createTask({
-    //   variables: {
-    //     input: {
-    //       id: uuidv4(),
-    //       title: formData.title,
-    //       content: formData.content,
-    //       dueDate: parseInt(formData.dueDate.format("x")),
-    //       status: TODO,
-    //     },
-    //   },
-    //   refetchQueries: [GET_TASKS_QUERY], // refetch after createTask
-    //   onCompleted: () => {
-    //     handleClose();
-    //   },
-    // });
+    createTask({
+      variables: {
+        input: {
+          id: uuidv4(),
+          title: formData.title,
+          content: formData.content,
+          dueDate: parseInt(formData.dueDate.format("x")),
+          status: TODO,
+        },
+      },
+      refetchQueries: [GET_TASKS_QUERY], // refetch after createTask
+      onCompleted: () => {
+        handleClose();
+      },
+    });
   };
 
   const handleClose = () => {
