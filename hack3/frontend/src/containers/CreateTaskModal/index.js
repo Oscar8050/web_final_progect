@@ -48,6 +48,7 @@ export default function CreateTaskModal({ open, handleCloseCreateTaskModal }) {
       return;
     }
     // TODO 4.2 Uncomment the following lines
+    //console.log(formData)
     createTask({
       variables: {
         input: {

@@ -13,20 +13,15 @@ export const UPDATE_TASK_MUTATION = gql`
 `;
 
 export const CREATE_TASK_MUTATION = gql`
-mutation createTask(
-  $id: ID!
-  $title: String!
-  $content: String!
-  $dueDate: Date!
-  $status: Status!) {
-    createTask(
-      input: {
-      id: $id
-      title: $title
-      content: $content
-      dueDate: $dueDate
-      status: $status
-    }) {
+mutation UpdateTask($id: ID!, $title: String!, $content: String!, $dueDate: Date!, $status: Status!) 
+{
+  createTask(input:{
+    id : $id
+    title : $title
+    content : $content
+    dueDate : $dueDate
+    status : $status
+  }) {
       id
       title
       content
@@ -35,6 +30,8 @@ mutation createTask(
     }
   }
 `;
+
+
 
 
 export const DELETE_TASK_MUTATION = gql`
