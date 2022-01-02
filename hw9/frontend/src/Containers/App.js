@@ -41,15 +41,15 @@ function App() {
   const savedMe = localStorage.getItem(LOCALSTORAGE_KEY);
 
 
-  const { status, messages, sendMessage, clearMessages } = useChat()
+  //const { status, messages, sendMessage, clearMessages } = useChat()
   const [body, setBody] = useState('')  // textBody
   const [me, setMe] = useState(savedMe || '')
   const [signedIn, setSignedIn] = useState(false)
   const bodyRef = useRef(null)
 
 
-  useEffect(() => { displayStatus(status) },
-    [status])
+  // useEffect(() => { displayStatus(status) },
+  //   [status])
 
   useEffect(() => {
     if (signedIn) {
@@ -62,9 +62,11 @@ function App() {
     <Wrapper>
       {
         !signedIn ? <SignIn me={me} setMe={setMe} setSignedIn={setSignedIn} displayStatus={displayStatus} /> :
-          <ChatRoom messages={messages} sendMessage={sendMessage} clearMessages={clearMessages}
-            displayStatus={displayStatus} me={me}
-            body={body} setBody={setBody} bodyRef={bodyRef}
+          <ChatRoom 
+            // messages={messages} sendMessage={sendMessage} clearMessages={clearMessages}
+            displayStatus={displayStatus} 
+            me={me}
+            // body={body} setBody={setBody} bodyRef={bodyRef}
           />
       }
 

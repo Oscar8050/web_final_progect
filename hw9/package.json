@@ -1,0 +1,16 @@
+{
+  "name": "hw9",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "cd ./frontend && yarn start",
+    "server": "cd ./backend && yarn server",
+    "test": "npx cypress run --browser=firefox --spec cypress/integration/*.spec.js"
+},
+  "devDependencies": {
+    "cypress": "^9.2.0",
+    "dotenv-defaults": "^3.0.0",
+    "mongoose": "^6.1.3"
+  }
+}
