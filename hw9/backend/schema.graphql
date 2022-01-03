@@ -1,5 +1,5 @@
 type Query {
-  _: String!
+  messages(from: String!, to: String!): [Message]
 }
 type Mutation {
   createChatBox(name1: String, name2: String): ChatBox!
