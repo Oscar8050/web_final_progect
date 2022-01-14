@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { render_page1 , render_page2 } from './axios.js';
+import { render_page1 , render_page2, send_letter } from './axios.js';
 import { useState , useEffect , useRef, useCallback} from 'react';
 import App from './App.js';
 import React from 'react';
@@ -18,6 +18,9 @@ function Alldone(){
     const [art, setArt] = useState("Default content")
     const [title, setTitle] = useState("Default topic")
     const [paper, setPaper] = useState(`url("https://cdn.pixabay.com/photo/2015/02/19/14/16/old-paper-642132_1280.jpg")`);
+    const [attr1, setAttr1] = useState("Problems to solve");
+    const [attr2, setAttr2] = useState("Problems to solve");
+    const [attr3, setAttr3] = useState("Problems to solve");
 
     const Render_art = async() => {
         const response = await render_page2();
@@ -54,6 +57,16 @@ function Alldone(){
         }
     }
 
+    const send = async(attr1, attr2, attr3) => {
+        const response = await send_letter(attr1, attr2, attr3);
+        console.log("here");
+        if(response == "success")
+            alert("send successfully!");
+        else{
+            alert("error!");
+        }
+    }
+
     const { Option } = Select;
 
     useEffect(() => {
@@ -73,7 +86,8 @@ function Alldone(){
         <Card title="Type : Default" style={{ width: '35vw', height: '15vh', marginTop: '3vh'}} >
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
             <div>Attached files count : 0</div>
-            <div style={{marginLeft: '30px'}}><Button style={{ backgroundColor: 'rgb(40, 176, 40)'}}>Send</Button></div>
+            <div style={{marginLeft: '30px'}}><Button style={{ backgroundColor: 'rgb(40, 176, 40)'}} onClick={() => {
+                send(attr1, attr2, attr3)}} >Send</Button></div>
             </div>
         </Card>
         </div>

@@ -1,5 +1,7 @@
 import express from 'express'
 import {getTexture, getTitle, getArt, saveTexture, saveTitle, saveArt} from './bank.js'
+import mongo from "./mongo.js";
+import mongoose from "mongoose";
 
 const router = express.Router()
 router.post('/start', (_, res) => {
@@ -55,6 +57,43 @@ router.get('/restore_art', (req, res) => {
         res.status(406).send({ msg: 'Fail' })
     }
   }
+)
+
+const letterSchema = new mongoose.Schema({
+  content: String,
+  title: String,
+  texture: String,
+  attr1: String,
+  attr2: String,
+  attr3: String,
+})
+
+const Let = mongoose.model('Letter', letterSchema)
+
+router.get('/send_letter', (req, res) => {
+  const art = getArt();
+  const tit = getTitle();
+  const tex = getTexture();
+  const attr1 = req.query.attr1;
+  const attr2 = req.query.attr2;
+  const attr3 = req.query.attr3;
+  try{
+    const lett = new Let({
+      content: art,
+      title: tit,
+      texture: tex,
+      attr1: attr1,
+      attr2: attr2,
+      attr3: attr3,
+    })
+    lett.save().then(result => {
+      console.log('note saved!')
+    })
+      res.json({msg: "success"});
+  }catch(e){
+      res.status(406).send({ msg: 'Fail' })
+  }
+}
 )
 
 export default router;

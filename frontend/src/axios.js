@@ -67,4 +67,20 @@ const render_page2 = async () => {
     }
 }
 
-export { store_page1 , render_page1, store_page2 , render_page2}
+const send_letter = async(attr1, attr2, attr3) => {
+    var temp = 0;
+    try{
+        const { data: { msg } } = await instance.get
+        ('/send_letter', { params: { attr1, attr2, attr3 } })
+        return msg
+    }
+    catch(error){
+        console.log(error.message);
+        if(error.message === "Network Error"){
+            return "server ERROR"
+        }
+        return "unexpected error, please try again later."
+    }
+}
+
+export { store_page1 , render_page1, store_page2 , render_page2, send_letter}
