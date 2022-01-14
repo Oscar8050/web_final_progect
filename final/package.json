@@ -1,0 +1,14 @@
+{
+  "name": "final",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "cd ./frontend && yarn start",
+    "server": "cd ./backend && yarn server",
+    "test": "npx cypress run --browser=firefox --spec cypress/integration/*.spec.js"
+  },
+  "dependencies": {
+    "@chatscope/chat-ui-kit-react": "^1.8.3"
+  }
+}
