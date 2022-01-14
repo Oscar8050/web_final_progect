@@ -12,11 +12,11 @@ export const ChatBoxMessages = ({username, chatBoxName, chatwparticular}) => {
       messagesFooter.current?.scrollIntoView({ behavior: "auto" })
       console.log('scrolltobottomed')
     }
-    useEffect(()=>{
-      refetch()
-      scrollToBottom()
-    }
-    ,[chatwparticular])
+    // useEffect(()=>{
+    //   refetch()
+    //   scrollToBottom()
+    // }
+    // ,[chatwparticular])
     useEffect(() => {scrollToBottom()}, [data])
     useEffect(async() => {
         //await refetch();

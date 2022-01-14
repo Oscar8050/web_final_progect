@@ -52,7 +52,7 @@ function App() {
     const [signUp, {loading: signUpLoading, error: signUpError, data: signUpData}] = useMutation(SIGNUP);
     const [createChatBox, {loading: createChatBoxLoading, error: createChatBoxError, data: createChatBoxData}] = useMutation(CREATE_CHATBOX);
     const [sendMessage, {loading: sendMessageLoading, error: sendMessageError, data: sendMessageData}] = useMutation(CREATE_MESSAGE);
-    const { loading, error, data,refetch} = useQuery(FRIENDS_QUERY, {variables:{username: currentUser}});
+    const { loading, error, data,refetch} = useQuery(FRIENDS_QUERY, {variables:{username: currentUser}, pollInterval:500});
 
     const displayStatus = (payload) => {
         // console.log(payload)
@@ -75,18 +75,8 @@ function App() {
         }
     };
     useEffect(() => {
-        // do some checking here to ensure data exist
         refetch()
-
-        //console.log(currentUser)
-        //console.log("I'm in chatlist useEffect")
-        // if (loading) return null;
-        // if (error) return `Error! ${error}`;
-        //console.log(data)
         if (data) {
-          // mutate data if you need to
-          //console.log("I'm in chatlist useEffect --> if(data)")
-          //console.log(data.friends[0].friendName)  
           setChatlistdata(data.friends)
           console.log('in useeffect',data.friends)
         }

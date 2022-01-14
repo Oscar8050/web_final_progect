@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import 'react-chat-elements/dist/main.css';
 import styles from "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 import {ConversationList, Conversation,Avatar} from "@chatscope/chat-ui-kit-react";
 import {format,} from'timeago.js';
+import { useQuery } from '@apollo/client';
+import { FRIENDS_QUERY } from '../graphql/queries';
 
 
 export default ({chatwparticular, setChatwparticular, setChatBoxName, currentUser, chatlistdata, setChatlistdata}) => {
@@ -21,7 +23,10 @@ export default ({chatwparticular, setChatwparticular, setChatBoxName, currentUse
     //     // setChatBoxName(makeName())
     //     console.log(e.target)
     // }
-
+    const { loading, error, data} = useQuery(FRIENDS_QUERY, {variables:{username: currentUser}, pollInterval:500});
+    useEffect(()=>{
+      setChatlistdata(data.friends)
+    },[data])
     return(
         // <ChatList 
         //     className = 'Chat_List'
