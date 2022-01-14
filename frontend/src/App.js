@@ -1,8 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
-import { useState , useEffect , useRef} from 'react';
+import { useState } from 'react';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import mainlogo from './MSB.png';
 import 'antd/dist/antd.css';
 import { Layout, Menu, Input, Steps} from 'antd';
@@ -10,7 +8,7 @@ import { UploadOutlined, UserOutlined, FormOutlined, BookOutlined } from '@ant-d
 import Write_letter from './write_letter.js';
 import Push from './Upload.js';
 import Alldone from './Alldone.js';
-import {Cover, get_choice, last_choice} from './Cover.js';
+import {Cover} from './Cover.js';
 /* https://ant.design/components/button/ */
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -38,17 +36,17 @@ var ch = -1;
         <div className="logo" >
           <img src={mainlogo} width={100}/>
         </div>
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-          <Menu.Item key="1" icon={<BookOutlined />} onClick={() => setChoice(0)}>
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={["0"]}>
+          <Menu.Item key="0" icon={<BookOutlined />} class={choice == 0 ? "ant-menu-item ant-menu-item-selected" : "ant-menu-item"} onClick={() => setChoice(0)}>
             letter cover
           </Menu.Item>
-          <Menu.Item key="2" icon={<FormOutlined />} onClick={() => setChoice(1)}>
+          <Menu.Item key="1" icon={<FormOutlined />} class={choice == 1 ? "ant-menu-item ant-menu-item-selected" : "ant-menu-item"} onClick={() => setChoice(1)}>
             content
           </Menu.Item>
-          <Menu.Item key="3" icon={<UploadOutlined />} onClick={() => setChoice(2)}>
+          <Menu.Item key="2" icon={<UploadOutlined />} class={choice == 2 ? "ant-menu-item ant-menu-item-selected" : "ant-menu-item"} onClick={() => setChoice(2)}>
             accessories
           </Menu.Item>
-          <Menu.Item key="4" icon={<UserOutlined />} onClick={() => setChoice(3)}>
+          <Menu.Item key="3" icon={<UserOutlined />} class={choice == 3 ? "ant-menu-item ant-menu-item-selected" : "ant-menu-item"} onClick={() => setChoice(3)}>
             check & send
           </Menu.Item>
         </Menu>

@@ -1,27 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
 import { store_page2 , render_page2 } from './axios.js';
-import { useState , useEffect , useRef, useCallback} from 'react';
+import { useState , useEffect , useCallback} from 'react';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import mainlogo from './MSB.png';
 import 'antd/dist/antd.css';
-import { Layout, Menu, Input, Button } from 'antd';
-import { UploadOutlined, UserOutlined, FormOutlined, BookOutlined } from '@ant-design/icons';
+import { Layout, Input, Button } from 'antd';
 /* https://ant.design/components/button/ */
 
 const { Header, Content, Footer, Sider } = Layout;
 const { TextArea } = Input;
 
 function Write_letter({step, onstep}){
+
     const [article, setArticle] = useState("");
+
+    /*自動切換至下一頁 */
     const nextstep = useCallback(() => {
         onstep(2)
     }, [onstep])
 
+    /*儲存版面內容 */
     const Save_page2 = async (art) => {
         const response = await store_page2(art);
-        console.log(response);
         if(response == "success"){
             alert("Content saved!");
             nextstep();
@@ -31,16 +30,15 @@ function Write_letter({step, onstep}){
         }
     }
 
+    /*復原暫存的版面 */
     const Render_page2 = async() => {
         const response = await render_page2();
-        console.log(response)
         if(response != "fail"){
-            console.log("success render");
             if(response != "Default content")
-            setArticle(response);
+                setArticle(response);
         }
         else{
-            console.log("Fail render");
+            console.log("render failed");
         }
     }
 
@@ -48,6 +46,7 @@ function Write_letter({step, onstep}){
         Render_page2();
       }, [])
 
+    /*render畫面 */
     var cont = (<div>
         <Content style={{ margin: '40px 50px 0'}}>
           <TextArea className="site-layout-background" rows={16} style={{padding:26, fontSize:'20px'}}

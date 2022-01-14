@@ -3,6 +3,7 @@ import axios from 'axios'
 const instance = axios.create
 ({ baseURL: 'http://localhost:4000/api/create' })
 
+/*存取材質和標題 */
 const store_page1 = async (title, tex) => {
     try{
         const { data: { msg } } = await instance.get
@@ -18,11 +19,11 @@ const store_page1 = async (title, tex) => {
     }
 }
 
+/*復原材質和標題 */
 const render_page1 = async () => {
-    var temp = 0;
     try{
         const { data: { msg } } = await instance.get
-        ('/restore_tit', { params: { temp } })
+        ('/restore_tit', { params: null })
         console.log(msg);
         return msg
     }
@@ -35,6 +36,7 @@ const render_page1 = async () => {
     }
 }
 
+/*存取信件內容 */
 const store_page2 = async (art) => {
     try{
         const { data: { msg } } = await instance.get
@@ -50,11 +52,11 @@ const store_page2 = async (art) => {
     }
 }
 
+/*還原信件內容 */
 const render_page2 = async () => {
-    var temp = 0;
     try{
         const { data: { msg } } = await instance.get
-        ('/restore_art', { params: { temp } })
+        ('/restore_art', { params: null })
         console.log(msg);
         return msg
     }
@@ -67,8 +69,8 @@ const render_page2 = async () => {
     }
 }
 
+/*寄出信件 */
 const send_letter = async(attr1, attr2, attr3) => {
-    var temp = 0;
     try{
         const { data: { msg } } = await instance.get
         ('/send_letter', { params: { attr1, attr2, attr3 } })

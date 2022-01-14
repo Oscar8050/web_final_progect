@@ -1,17 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
 import { render_page1 , render_page2, send_letter } from './axios.js';
-import { useState , useEffect , useRef, useCallback} from 'react';
-import App from './App.js';
+import { useState , useEffect, useCallback} from 'react';
 import React from 'react';
 import './write_letter.js';
 import 'antd/dist/antd.css';
 import { Layout, Menu, Input, Space, Card, Button, Select } from 'antd';
 import SizeContext from 'antd/lib/config-provider/SizeContext';
-
-function handleChange(value) {
-    console.log(`selected ${value}`);
-  }
 
 function Alldone(){
 
@@ -19,8 +13,19 @@ function Alldone(){
     const [title, setTitle] = useState("Default topic")
     const [paper, setPaper] = useState(`url("https://cdn.pixabay.com/photo/2015/02/19/14/16/old-paper-642132_1280.jpg")`);
     const [attr1, setAttr1] = useState("Problems to solve");
-    const [attr2, setAttr2] = useState("Problems to solve");
-    const [attr3, setAttr3] = useState("Problems to solve");
+    const [attr2, setAttr2] = useState("None");
+    const [attr3, setAttr3] = useState("None");
+
+    const handleChange = (value, num) => {
+        console.log(`selected ${value}`);
+        console.log(num);
+        if(num === 1){
+            setAttr1(value);
+        }
+        else if(num === 2){
+            setAttr2(value);
+        }
+    }
 
     const Render_art = async() => {
         const response = await render_page2();
@@ -92,7 +97,7 @@ function Alldone(){
         </Card>
         </div>
         <Card title="Tag table" style={{ width: '20vw', height: '35vh', marginLeft: 'auto' }} >
-            <Select defaultValue="Problem to Solve" style={{ width: '15vw' }} onChange={handleChange}>
+            <Select defaultValue="Problem to Solve" style={{ width: '15vw' }} onChange={(value)=>{ handleChange(value,1)}}>
             <Option value="Problem to Solve">Problem to Solve</Option>
             <Option value="Sharing Feelings">Sharing Feelings</Option>
             <Option value="disabled" disabled>
@@ -101,7 +106,7 @@ function Alldone(){
             <Option value="Send Data">Send Data</Option>
             </Select>
             <p></p>
-            <Select defaultValue="About" style={{ width: '15vw' }} onChange={handleChange}>
+            <Select defaultValue="About" style={{ width: '15vw' }} onChange={(value) => {handleChange(value,2)}}>
             <Option value="About">About</Option>
             <Option value="Job">Job</Option>
             <Option value="School">School</Option>
@@ -109,19 +114,15 @@ function Alldone(){
             <Option value="Love">Love</Option>
             <Option value="Family">Family</Option>
             <Option value="Hobbies">Hobbies</Option>
-            <Option value="Glossories">Glossories</Option>
+            <Option value="Others">Others</Option>
             </Select>
             <p></p>
-            <Select defaultValue="Attribute" style={{ width: '15vw' }} onChange={handleChange}>
-            <Option value="Attribute">Attribute</Option>
-            <Option value="Job">Job</Option>
-            <Option value="School">School</Option>
-            <Option value="Relationship">Relationship</Option>
-            <Option value="Love">Love</Option>
-            <Option value="Family">Family</Option>
-            <Option value="Hobbies">Hobbies</Option>
-            <Option value="Glossories">Glossories</Option>
-            </Select>
+            <Card style={{ width: '15vw', height: '10vh'}} >
+            <div style={{ display: 'flex', flexDirection: 'row', marginTop: '-2vh', marginLeft: '-1vw'}}>
+                Selfdefined Attribute
+            </div>
+            <Input style={{ width: '14vw', marginLeft: '-1.5vw'}} placeholder="Attribute..." allowClear value={attr3} onChange={(e) => {setAttr3(e.target.value)}} />
+        </Card>
         </Card>
     </div>
 }

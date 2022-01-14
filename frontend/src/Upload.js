@@ -1,6 +1,5 @@
 import React from 'react';
-import { useState , useEffect , useRef, useCallback} from 'react';
-import ReactDOM from 'react-dom';
+import { useState , useEffect , useCallback} from 'react';
 import 'antd/dist/antd.css';
 import './index.css';
 import { Upload, message, Button, Card } from 'antd';
@@ -8,9 +7,11 @@ import { UploadOutlined } from '@ant-design/icons';
 
 function Push({step, onstep}){
 
+    /*自動切換至下一頁 */
     const nextstep = useCallback(() => {
         onstep(3)
     }, [onstep])
+
 
     const props = {
     name: 'file',
@@ -28,13 +29,18 @@ function Push({step, onstep}){
         message.error(`${info.file.name} file upload failed.`);
         }
         console.log(info);
+        setFiles(props);
+        console.log(files);
     },
     };
 
+    const [files, setFiles] = useState(props);
+
+    /*render 畫面 */
     return (
     <div className="upload"> 
     <Card title="Great! It is almost completed! You can upload files here if needed." >
-        <Upload {...props}>
+        <Upload {...files}>
         <Button icon={<UploadOutlined />}>Click here to Upload</Button>
         </Upload>
         <p></p>
