@@ -12,25 +12,29 @@ export const ChatBoxMessages = ({username, chatBoxName, chatwparticular}) => {
       messagesFooter.current?.scrollIntoView({ behavior: "auto" })
       console.log('scrolltobottomed')
     }
-    // useEffect(()=>{
-    //   refetch()
-    //   scrollToBottom()
-    // }
-    // ,[chatwparticular])
+    useEffect(async ()=>{
+      await refetch()
+      scrollToBottom()
+    }
+    ,[chatwparticular])
     useEffect(() => {scrollToBottom()}, [data])
     useEffect(async() => {
         //await refetch();
-        console.log('i refetched')
+        console.log('i here!!!!!!!')
         //scrollToBottom()
         try {
+          console.log('in try')
           subscribeToMore({
             document: MESSAGE_SUBSCRIPTION,
             variables: { chatBoxName },
             updateQuery: (prev, { subscriptionData }) => {
-              //console.log(prev)
-              if (!subscriptionData.data) return prev;
+              console.log('there')
+              if (!subscriptionData.data){
+                
+                return prev;
+              } 
               const newMessage = subscriptionData.data.message.message;
-    
+              
               return {
                 ...prev,
                 messages: [...prev.messages, newMessage],
@@ -38,7 +42,7 @@ export const ChatBoxMessages = ({username, chatBoxName, chatwparticular}) => {
             },
           });
         } catch (e) {}
-    }, [chatBoxName, subscribeToMore]);
+    }, [ subscribeToMore]);
     
     if (loading) 
       return <p>"Loading...";</p>;

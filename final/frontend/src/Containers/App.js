@@ -52,7 +52,7 @@ function App() {
     const [signUp, {loading: signUpLoading, error: signUpError, data: signUpData}] = useMutation(SIGNUP);
     const [createChatBox, {loading: createChatBoxLoading, error: createChatBoxError, data: createChatBoxData}] = useMutation(CREATE_CHATBOX);
     const [sendMessage, {loading: sendMessageLoading, error: sendMessageError, data: sendMessageData}] = useMutation(CREATE_MESSAGE);
-    const { loading, error, data,refetch} = useQuery(FRIENDS_QUERY, {variables:{username: currentUser}, pollInterval:500});
+    const { loading, error, data,refetch} = useQuery(FRIENDS_QUERY, {variables:{username: currentUser}});
 
     const displayStatus = (payload) => {
         // console.log(payload)

@@ -25,7 +25,10 @@ export default ({chatwparticular, setChatwparticular, setChatBoxName, currentUse
     // }
     const { loading, error, data} = useQuery(FRIENDS_QUERY, {variables:{username: currentUser}, pollInterval:500});
     useEffect(()=>{
-      setChatlistdata(data.friends)
+      try{
+        setChatlistdata(data.friends)
+      }
+      catch(e){}
     },[data])
     return(
         // <ChatList 
