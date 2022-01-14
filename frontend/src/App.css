@@ -1,0 +1,137 @@
+.App {
+  position:absolute;
+  text-align: center;
+  animation-name:welcome;
+  animation-duration:5s;
+  animation-iteration-count:infinite;
+}
+
+.App-logo {
+  height: 17vmin;
+  pointer-events: none;
+  margin-top: -10vh;
+}
+
+.Begin{
+  margin-top: 5vh;
+  color:#fff;
+  display: flex;
+  font-size: 3vmin;
+  font-family: cursive;
+}
+
+.App:hover{
+  cursor: pointer;
+}
+
+@keyframes welcome{
+  0%{background-position:10% 0%}
+  50%{background-position:91% 100%}
+  100%{background-position:10% 0%}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 4s linear;
+  }
+}
+
+.App-header {
+  position:absolute;
+  text-align: center;
+  -webkit-animation: Animation 4s ease infinite;
+    -moz-animation: Animation 4s ease infinite;
+    animation: Animation 5s ease infinite;
+  background:linear-gradient(130deg, #945414, #362705, #000000, #0a5e61);
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  background-size: 150% 150%;
+}
+
+@-webkit-keyframes Animation {
+  0%{background-position:10% 0%}
+  50%{background-position:91% 100%}
+  100%{background-position:10% 0%}
+}
+@-moz-keyframes Animation {
+  0%{background-position:10% 0%}
+  50%{background-position:91% 100%}
+  100%{background-position:10% 0%}
+}
+@keyframes Animation { 
+  0%{background-position:10% 0%}
+  50%{background-position:91% 100%}
+  100%{background-position:10% 0%}
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  0% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(-10deg);
+  }
+}
+
+.ant-form-item-required{
+  color:azure !important;
+}
+
+.ant-checkbox-wrapper{
+  color:azure !important;
+}
+
+.mainpage{
+  min-width: 100vw;
+  min-height: 100vh;
+  animation: lightup 5s ease;
+  text-align: center;
+  vertical-align: middle;
+}
+
+@keyframes lightup {
+  0% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.blocks{
+  display:flex;
+  margin:auto;
+  width: 80vw;
+  height: 80vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.block{
+  height: 50vh;
+  width: 20vw;
+  border-radius:3vmin;
+  background-color: rgb(218, 212, 206);
+  margin:auto;
+  font-size: larger;
+  font-family: cursive;
+  color:black;
+  text-align: center;
+  line-height: 16vh;
+}
