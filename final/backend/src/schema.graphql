@@ -1,0 +1,84 @@
+type Query {
+  messages(chatBoxName: String): [Message!]
+  friends(username: String!): [FriendsInfoPayload!]
+}
+
+type Mutation {
+  login(username: String, password: String, secretKey: String): AuthPayload!
+  signUp(username: String, password: String): AuthPayload!
+  createChatBox(name1: String, name2: String): CreateChatBoxPayload!
+  createMessage(
+    from: String
+    to: String
+    message: String
+  ): CreateMessagePayload!
+  makefriend(name1: String, name2: String): FriPayload!
+}
+
+type Subscription {
+  message(chatBoxName: String): MessageSubscriptionPayload!
+  friend(username1: String, username2: String): FriendSubscriptionPayload!
+}
+
+type AuthPayload {
+  status: AuthType!
+  message: String!
+}
+
+type FriPayload {
+  status: AuthType!
+  message: String!
+}
+
+type CreateChatBoxPayload {
+  response: AuthPayload!
+  chatBox: ChatBox
+}
+
+type CreateMessagePayload {
+  response: AuthPayload!
+  message: Message!
+}
+
+enum AuthType {
+  Success
+  Failed
+}
+
+type MessageSubscriptionPayload {
+  mutation: MutationType!
+  message: Message!
+}
+
+type FriendSubscriptionPayload {
+  mutation: MutationType!
+  lastmsg: Message!
+}
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+type FriendsInfoPayload {
+  friendName: String!
+  lastmsg: Message!
+}
+
+type ChatBox {
+  id: ID!
+  name: String!
+  messages: [Message!]
+}
+
+type Message {
+  id: ID!
+  sender: User!
+  body: String!
+  timestamp: String!
+}
+
+type User {
+  id: ID!
+  username: String!
+}
