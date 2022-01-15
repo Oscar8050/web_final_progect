@@ -11,6 +11,7 @@ router.post('/start', (_, res) => {
 router.get('/store_tit', (req, res) => {
     const tit = req.query.title;
     const tex = req.query.tex;
+    const usr = req.query.usr;
     try{
         saveTitle(tit);
         saveTexture(tex);
@@ -25,6 +26,7 @@ router.get('/store_tit', (req, res) => {
 )
 
 router.get('/restore_tit', (req, res) => {
+    const usr = req.query.usr;
     const tit = getTitle();
     const tex = getTexture();
     console.log({tit, tex});
@@ -89,6 +91,9 @@ router.get('/send_letter', (req, res) => {
     lett.save().then(result => {
       console.log('note saved!')
     })
+    saveTitle("");
+    saveTexture("classic");
+    saveArt("");
       res.json({msg: "success"});
   }catch(e){
       res.status(406).send({ msg: 'Fail' })
