@@ -2,10 +2,7 @@
   "name": "web_final_progect",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/Oscar8050/web_final_progect.git",
-  "license": "MIT",
-  "scripts":{
-  "start":"cd frontend && yarn start",
-  "server":"cd backend && yarn server"
-  }
+  "repository": "git@github.com:Oscar8050/web_final_progect.git",
+  "author": "Oscar Peng <oscar5206@gmail.com>",
+  "license": "MIT"
 }
