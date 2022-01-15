@@ -69,7 +69,21 @@ const Mutation = {
         })
         return {response: {status: 'Success', message: 'Message sent'}, message: newMsg};
     },
-
+    async createletter(parent, {username}, {db, pubsub}, info){
+        const user = await checkUser(db, username, "createletter")
+        if(!user.content || !user.title || !user.tex || !user.art1 || !user.art2 || !user.art3){
+            await new db.LetterModel({content: user.content,
+                sender:user,
+                title: user.title,
+                texture: user.texture,
+                attr1: user.art1,
+                attr2: user.art2,
+                attr3: user.art3,}).save()
+            return {status: 'Success', message: `letter: ${user.title} is created`}
+        }
+        return {status: 'Failed', message: `You seem to miss some of the attributes.`}    
+        
+    },
     async makefriend(parent, {name1, name2}, {db, pubsub}, info){
         if(!name1 || !name2)
             throw new Error("Missing chatBox name for CreateChatBox");
@@ -83,7 +97,24 @@ const Mutation = {
         await newFriend(db,{username: name2, friendname: name1})
 
         return {status: 'Success', message: `${name1} and ${name2} are friends now`};
-
+    
+    },
+    async saveattribute(parent, {username, content, title, tex, art1, art2, art3}, {db, pubsub}, info){
+        const user = await checkUser(db, username, "signUp");
+        if(content)
+            user.content = content
+        if(title)
+            user.title = title
+        if(tex)
+            user.texture = tex
+        if(art1)
+            user.art1 = art1
+        if(art2)
+            user.art2 = art2
+        if(art3)
+            user.art3 = art3
+        user.save()
+        return {status: 'Success', message: `save attributes : ${user.title}, ${user.texture} and ${user.art1} successfully`};
     }
 };
 

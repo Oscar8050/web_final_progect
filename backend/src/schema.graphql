@@ -14,6 +14,16 @@ type Mutation {
     message: String
   ): CreateMessagePayload!
   makefriend(name1: String, name2: String): FriPayload!
+  saveattribute(
+    username: String
+    content: String
+    title: String
+    tex: String
+    art1: String
+    art2: String
+    art3: String
+  ): SaveAttrPayload!
+  createletter(username: String): CreateLetterPayload!
 }
 
 type Subscription {
@@ -39,6 +49,16 @@ type CreateChatBoxPayload {
 type CreateMessagePayload {
   response: AuthPayload!
   message: Message!
+}
+
+type CreateLetterPayload {
+  status: AuthType!
+  message: String!
+}
+
+type SaveAttrPayload {
+  status: AuthType!
+  message: String!
 }
 
 enum AuthType {
@@ -82,20 +102,29 @@ type Message {
 type User {
   id: ID!
   username: String!
+  friends: [String!] #或許可刪
+  lastmsg: [String!] #或許可刪
+  content: String
+  title: String
+  texture: String
+  art1: String
+  art2: String
+  art3: String
 }
 
 input attrs {
-    attr1: String!
-    attr2: String!
-    attr3: String!
+  attr1: String!
+  attr2: String!
+  attr3: String!
 }
 
 type Letter {
-    id: ID!
-    title: String!
-    content: String!
-    texture: String!
-    attr1: String!
-    attr2: String!
-    attr3: String!
+  id: ID!
+  sender: User!
+  title: String!
+  content: String!
+  texture: String!
+  attr1: String!
+  attr2: String!
+  attr3: String!
 }

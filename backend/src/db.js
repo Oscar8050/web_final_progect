@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const LetterSchema = new Schema({
+  sender: { type: mongoose.Types.ObjectId, ref: "User" },
   content: {type: String, required: true},
   title: {type: String, required: true},
   texture: {type: String, required: true},
@@ -16,6 +17,15 @@ const UserSchema = new Schema({
   //friends: [{ type: mongoose.Types.ObjectId, ref: "Friend" }],
   friends: [{ type: String, required: true }],
   lastmsg : [{ type: mongoose.Types.ObjectId, ref: "Message" }],
+  // title : { type: String, required: true },
+  // texture : { type: String, required: true },
+  // art : { type: String, required: true },
+  content: String,
+  title: String,
+  texture: String,
+  art1: String,
+  art2: String,
+  art3: String,
 });
 
 // const FriendSchema = new Schema({

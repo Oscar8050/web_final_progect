@@ -30,8 +30,10 @@ const checkRelationship = async (db,name1,name2) => {
 }
 
 const newUser = (db, username, password) => {
-    return new db.UserModel({username, password}).save();
+    return new db.UserModel({username, password,friends:[],lastmsg:[],content:"",
+        title:"",texture:"",art1:"",art2:"",art3:""}).save();
 }
+
 const newFriend = async(db, {username,friendname}) => {
     let tmp = await db.UserModel.findOne({username})
     tmp.friends.push(friendname)
