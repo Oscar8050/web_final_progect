@@ -4,6 +4,7 @@ import {message as popUpMessage, Input} from 'antd';
 import styled from 'styled-components';
 import useChat from '../Hooks/useChat';
 import ChatRoom from './ChatRoom';
+import './App.css';
 //import Tabs from './Tab';
 import {
     LOGIN,
@@ -20,7 +21,7 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: center;
     height: 100vh;
-    width: 500px;
+    width: 10vw;
     margin: auto;
     overflow:hidden;
     text-overflow:ellipsis;
@@ -127,9 +128,12 @@ function App() {
         //     />}
         // </Wrapper>
         
-        <Wrapper>
+        <div className="side" style={{width: "100%",
+        height: "100%", backgroundImage: `url("https://www.pixeden.com/media/k2/galleries/236/002-bublle-ball-blow-clear-glossy-vector-psd.jpg")`,
+        backgroundSize: 'cover'}}>
             {!inin?
             <Input.Search
+            style={{width:"50vw"}}
             enterButton="Send"
             placeholder="Type username here..."
             autoFocus = {true}
@@ -146,7 +150,7 @@ function App() {
                 chatBoxName = {chatBoxName} setChatBoxName = {setChatBoxName}
                 />
             }
-        </Wrapper>
+        </div>
     )
 }
 

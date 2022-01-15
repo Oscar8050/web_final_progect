@@ -27,7 +27,7 @@ export default ({chatwparticular, setChatwparticular, setChatBoxName, currentUse
     useEffect(()=>{
       try{
         //let difference = data.friends.filter((i)=>chatlistdata.includes({lastmsg:i.lastmsg}))
-        console.log("data.friends : ",data.friends)
+        console.log("data.friends : ",data)
         console.log("chatlistdata : ", chatlistdata)
         //console.log('difference : ',difference)
         //let tmp = data.friends.map(i => {return {...i}})
@@ -45,7 +45,7 @@ export default ({chatwparticular, setChatwparticular, setChatBoxName, currentUse
         setChatlistdata(data.friends)
       }
       catch(e){}
-    },[data])
+    },[])
     return(
         // <ChatList 
         //     className = 'Chat_List'
@@ -53,10 +53,7 @@ export default ({chatwparticular, setChatwparticular, setChatBoxName, currentUse
         //     onClick = {onClick}
         // /> 
         
-        <div style={{
-            height: "340px",
-            width: "340px"
-          }}>
+        <div>
                 <ConversationList>        
                   {/* <Conversation name="Lilly" lastSenderName="Lilly" info="Yes i can do it for you" >
                     <Avatar src={null} name="Lilly" />
@@ -65,6 +62,7 @@ export default ({chatwparticular, setChatwparticular, setChatBoxName, currentUse
                       chatlistdata.map(({friendName, lastmsg},i)=>
                         {
                         return (
+                          <div className="board">
                         <Conversation key = {i} name={friendName} lastSenderName={lastmsg.sender.username} 
                                     info = {lastmsg.body} 
                                     onClick = {() => {
@@ -73,13 +71,14 @@ export default ({chatwparticular, setChatwparticular, setChatBoxName, currentUse
                                     }} 
                                     lastActivityTime={<span style={{
                                         color: "teal"
-                                      }}>{format(lastmsg.timestamp)}</span>} unreadDot = {i%2?true:false}>
+                                      }}>{format(lastmsg.timestamp)}</span>} >
                             {/* <Avatar src={null} name={friendName} /> */}
-                        </Conversation>)
+                        </Conversation>
+                        </div>)
                         }
                       )
                   }                  
                 </ConversationList>
-              </div>
+                </div>
     )
 }

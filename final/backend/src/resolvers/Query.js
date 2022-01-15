@@ -16,6 +16,8 @@ const Query = {
         
         const me = await db.UserModel.findOne({username:username})
         const friendsinfo = []
+        if(!me)
+            return friendsinfo
         let friendsnum = me.friends.length
         for(let i = 0; i < friendsnum; ++i){
             friendsinfo.push({friendName:me.friends[i], lastmsg:await db.MessageModel.findById(me.lastmsg[i])})

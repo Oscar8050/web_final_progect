@@ -4,6 +4,8 @@ import Message from '../Components/Message';
 import { ChatBoxMessages } from '../Components/ChatBoxMessages';
 import { useQuery } from '@apollo/client';
 import { FRIENDS_QUERY } from '../graphql/queries';
+import { useState } from 'react';
+import './App.css'
 
 const chatboxnamedecompose = (chatBoxName) => {
     let tmp = chatBoxName.split('_')
@@ -22,22 +24,44 @@ const ChatRoom = (props) => {
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
+
+    const getRandomInt = (max) => {
+        return Math.floor(Math.random() * max);
+      }
+
+    const urls = [`url("https://news.aut.ac.nz/__data/assets/image/0004/371569/bubbles-850x567.jpg")`,
+    `url("https://d25tv1xepz39hi.cloudfront.net/2020-06-01/files/natural-light-sunset-beach_2044-tb.jpg")`
+,`url("https://365psd.com/images/previews/dcf/psd-water-bubbles-56305.jpg")`]
+
+    const [back_pic, setBack_pic] = useState(urls[0]);
+
+    const change_page = () => {
+        var temp = getRandomInt(3);
+        console.log(temp);
+        setBack_pic(urls[temp]);
+        console.log(back_pic);
+    }
+
     let two = chatboxnamedecompose(chatBoxName)
     const anotherUser = two[0] === username ? two[1] :two[0]
 
     return (
-        <>
+        <div style={{width: "100%",
+        height: "100%", backgroundImage: back_pic,
+        backgroundSize: 'cover'}}>
         <Title>
             <h1>{anotherUser}</h1>
             <Button type="primary" danger onClick={()=>{   
-                setChatwparticular(false)
-                setChatBoxName('')
+                setChatwparticular(false);
+                setChatBoxName('');
+                change_page();
             }}>
             back
             </Button>
         </Title>
-        <ChatBoxMessages username = {username} chatBoxName = {chatBoxName} chatwparticular = {chatwparticular}/>
+        <ChatBoxMessages className="chat" username = {username} chatBoxName = {chatBoxName} chatwparticular = {chatwparticular}/>
         <Input.Search
+        style={{width: '50vw'}}
             enterButton="Send"
             placeholder="Type a message here..."
             value={body}
@@ -70,7 +94,7 @@ const ChatRoom = (props) => {
         // }
             }}
         ></Input.Search>
-        </>
+        </div>
     )
 }
 

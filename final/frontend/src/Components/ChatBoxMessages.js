@@ -49,7 +49,7 @@ export const ChatBoxMessages = ({username, chatBoxName, chatwparticular}) => {
     if (error) 
       return <p>"Error!"</p>;
     return(
-      <Message>
+      <Message style={{width: '50vw', margin: 'auto', height: '70vh'}}>
       {data.messages.map(({ sender, body }, i) => 
       (username === sender.username)?
       (   <p key={i} style={{textAlign:'right', wordWrap:'break-word'}}>
