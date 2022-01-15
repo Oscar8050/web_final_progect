@@ -5,8 +5,8 @@ type Query {
 }
 
 type Mutation {
-  login(username: String, password: String, secretKey: String): AuthPayload!
-  signUp(username: String, password: String): AuthPayload!
+  login(username: String, hashedpassword: String): AuthPayload!
+  signUp(username: String, hashedpassword: String): AuthPayload!
   createChatBox(name1: String, name2: String): CreateChatBoxPayload!
   createMessage(
     from: String

@@ -13,7 +13,7 @@ const LetterSchema = new Schema({
 
 const UserSchema = new Schema({
   username: { type: String, required: true },
-  password: { type: String, required: true },
+  hashedpassword: { type: String, required: true },
   //friends: [{ type: mongoose.Types.ObjectId, ref: "Friend" }],
   friends: [{ type: String, required: true }],
   lastmsg : [{ type: mongoose.Types.ObjectId, ref: "Message" }],

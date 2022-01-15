@@ -29,8 +29,8 @@ const checkRelationship = async (db,name1,name2) => {
 
 }
 
-const newUser = (db, username, password) => {
-    return new db.UserModel({username, password,friends:[],lastmsg:[],content:"",
+const newUser = (db, username, hashedpassword) => {
+    return new db.UserModel({username, hashedpassword,friends:[],lastmsg:[],content:"",
         title:"",texture:"",art1:"",art2:"",art3:""}).save();
 }
 
