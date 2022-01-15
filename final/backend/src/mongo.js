@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import dotenv from "dotenv-defaults";
 
-export default () => {
+export default async() => {
     dotenv.config();
     mongoose.connect(process.env.MONGO_URL, {
         useNewUrlParser: true,

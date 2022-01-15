@@ -59,13 +59,15 @@ const ChatRoom = (props) => {
                         message: msg
                     },
                 });
-                setBody('');
+        //         setBody('');
 
-                refetch()
-                if (data) {
-                setChatlistdata(data.friends)
-                //console.log('in chatroom useeffect',data.friends)
-        }
+        //         refetch()
+        //         if (data) {
+        //         let tmp = data.friends.map(i => {return {...i}})
+        //         tmp.forEach((i)=>{i.unreadDot = false});    
+        //         setChatlistdata(tmp)
+        //         //console.log('in chatroom useeffect',data.friends)
+        // }
             }}
         ></Input.Search>
         </>

@@ -26,6 +26,22 @@ export default ({chatwparticular, setChatwparticular, setChatBoxName, currentUse
     const { loading, error, data} = useQuery(FRIENDS_QUERY, {variables:{username: currentUser}, pollInterval:500});
     useEffect(()=>{
       try{
+        //let difference = data.friends.filter((i)=>chatlistdata.includes({lastmsg:i.lastmsg}))
+        console.log("data.friends : ",data.friends)
+        console.log("chatlistdata : ", chatlistdata)
+        //console.log('difference : ',difference)
+        //let tmp = data.friends.map(i => {return {...i}})
+        //let tmp2 = data.friends.map((i)=>{return  [i.friendName, i.lastmsg]})
+        let tmp = []
+        for(let i = 0; i < data.friends.length; ++i){
+          tmp.push([data.friends[i].friendName, data.friends[i].lastmsg.sender.username, data.friends[i].lastmsg.body])
+        }
+        console.log(tmp)
+        // tmp.forEach(element => {
+        //   return {friendName: element.friendName, lastmsg: element.lastmsg}
+        // });
+        //console.log('tmp2 : ',tmp2[0])
+        //tmp.forEach(i => {i.[[Prototype]]});
         setChatlistdata(data.friends)
       }
       catch(e){}
@@ -57,7 +73,7 @@ export default ({chatwparticular, setChatwparticular, setChatBoxName, currentUse
                                     }} 
                                     lastActivityTime={<span style={{
                                         color: "teal"
-                                      }}>{format(lastmsg.timestamp)}</span>}>
+                                      }}>{format(lastmsg.timestamp)}</span>} unreadDot = {i%2?true:false}>
                             {/* <Avatar src={null} name={friendName} /> */}
                         </Conversation>)
                         }

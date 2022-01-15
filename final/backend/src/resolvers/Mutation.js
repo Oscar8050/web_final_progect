@@ -57,16 +57,8 @@ const Mutation = {
         await chatBox.messages.push(newMsg._id);
         await chatBox.save();
 
-        //console.log(sender.friends)
-        //const friendslist = await db.FriendModel.findOne({_id:})
-        //map.froeach
         await updatelastmsg(db,from,to, newMsg)
-        // const sender_fri = await sender.friends.find((i) => { i.friendname === receiver.username})
-        // const receiver_fri = await receiver.friends.find((i) => { i.friendname === sender.username})
-        // await sender_fri.lastmsg.pop()
-        // await sender_fri.lastmsg.push(newMsg)
-        // await receiver_fri.lastmsg.pop()
-        // await receiver_fri.lastmsg.push(newMsg)
+        
 
         pubsub.publish(`chatBox ${chatBoxName}`, {
             message: {mutation: 'CREATED', message: newMsg}
@@ -87,9 +79,6 @@ const Mutation = {
             return {status: 'Failed', message: `user ${name2} does not exist`};
         if(await checkRelationship(db,name1, name2))
             return {status: 'Failed', message: `${name1} and ${name2} are already been friends!!!`};
-        //console.log(name1,' ' ,name2)
-        // console.log(user1)
-        // console.log(user2)
         await newFriend(db,{username: name1, friendname: name2})
         await newFriend(db,{username: name2, friendname: name1})
 

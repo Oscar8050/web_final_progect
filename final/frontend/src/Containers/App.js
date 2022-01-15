@@ -74,13 +74,15 @@ function App() {
             }
         }
     };
-    useEffect(() => {
-        refetch()
-        if (data) {
-          setChatlistdata(data.friends)
-          console.log('in useeffect',data.friends)
-        }
-      }, [chatwparticular,inin])
+    // useEffect(() => {
+    //     refetch()
+    //     if (data) {
+    //     let tmp = data.friends.map(i => {return {...i}})
+    //     tmp.forEach((i)=>{i.unreadDot = false});
+    //     setChatlistdata(tmp)
+    //       //console.log('in useeffect',data.friends)
+    //     }
+    //   }, [chatwparticular,inin])
     // useEffect(() => { 
     //     if(!signUpLoading&& !signUpError && signUpData!==undefined){
     //         displayStatus(signUpData.signUp)
