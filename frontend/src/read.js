@@ -1,6 +1,9 @@
 import React from 'react';
 import { useState } from "react";
-import {Button } from 'antd';
+import { Button } from 'antd';
+import {
+    GET_LETTERS_QUERY
+} from "./graphql";
 
 function Read_Reply(props) {
 
