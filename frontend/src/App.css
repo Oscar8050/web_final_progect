@@ -37,11 +37,16 @@
   }
 }
 
-::placeholder {
+
+::placeholder{
   font-size: 30px;
 }
+
 .ant-input {
   font-size: 30px !important;
+}
+.final .ant-card-head-title{
+  font-size: 25px;
 }
 
 

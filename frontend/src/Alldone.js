@@ -30,7 +30,7 @@ function Alldone({step, setStep, attr1, attr2, attr3, setAttr1, setAttr2, setAtt
 
 
     var show = (<>
-        {step == 1 ?  <Card title="Select topics you are interested in" style={{ width: '22vw', height: '80vh', marginLeft: 'auto', marginRight: 'auto'}} >
+        {step == 1 ?  <Card title="Select topics you are interested in" style={{ width: '24vw', height: '80vh', marginLeft: 'auto', marginRight: 'auto'}} >
             <Select defaultValue="Problem to Solve" style={{ width: '15vw' }} onChange={(e) => setAttr1(e.key.value)}>
                 <Option value="Problem to Solve">Problem to Solve</Option>
                 <Option value="Sharing Feelings">Sharing Feelings</Option>
@@ -69,22 +69,24 @@ function Alldone({step, setStep, attr1, attr2, attr3, setAttr1, setAttr2, setAtt
                 }}}>Search</Button>
         </Card> : <div className="final">
 
-                <div>
+
                     <Card title={title} style={{ margin: 'auto', width: '58vw', height: '49vh',backgroundImage: paper,
                         backgroundSize: 'cover', fontFamily: 'Cambria, Cochin, Georgia, Times, Times New Roman, serif' , fontSize: 20}} >
                         {art == 'Please select threes topic that you are interested in' ? <div style={{height: '38vh'}}>{art}</div> : <div style={{overflowY: 'scroll', height: '38vh'}}>{art}</div>}
 
                     </Card>
                     <TextArea placeholder='Send regards to your new friend' style={{margin: 'auto', width: '58vw', height: '28vh'}} showCount maxLength={200} onChange={e => console.log(e)} />
+            <div style={{height: '3vh'}}></div>
+            <div style={{textAlign: 'center'}}>
+                <Button style={{position: 'relative'}} className='reply' type="dashed" danger size='large'>
+                    Cancel
+                </Button>
+                <Button style={{position: 'relative'}} className='reply' type="dashed" size='large'>
+                    Sendsdf
+                </Button>
+            </div>
 
-                    <Button type="dashed" danger size='large'>
-                        Cancel
-                    </Button>
-                    <Button className='reply' type="dashed" size='large'>
-                        Send
-                    </Button>
 
-                </div>
 
         </div>}
     </>)
