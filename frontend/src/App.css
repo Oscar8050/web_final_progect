@@ -134,4 +134,18 @@
   color:black;
   text-align: center;
   line-height: 16vh;
+  transition: all .8s ease-in-out;
+}
+
+.block:hover{
+  transform: scale(1.05);
+
+}
+
+.ask{
+  color:blanchedalmond !important;
+}
+
+.ask:hover{
+  text-decoration: underline;
 }
