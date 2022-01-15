@@ -6,7 +6,13 @@ import {format,} from'timeago.js';
 import { useQuery } from '@apollo/client';
 import { FRIENDS_QUERY } from '../graphql/queries';
 
-
+const tolist = (_array) => {
+  let tmp = []
+  for(let i = 0; i < _array.length; ++i){
+    tmp.push([_array[i].friendName, _array[i].lastmsg.sender.username, _array[i].lastmsg.body])
+  }
+  return tmp
+}
 export default ({chatwparticular, setChatwparticular, setChatBoxName, currentUser, chatlistdata, setChatlistdata}) => {
     const [friendsInfo,setFriendsInfo] = useState([])
     //const [toinit,setToinit] = useState(false)
@@ -27,16 +33,21 @@ export default ({chatwparticular, setChatwparticular, setChatBoxName, currentUse
     useEffect(()=>{
       try{
         //let difference = data.friends.filter((i)=>chatlistdata.includes({lastmsg:i.lastmsg}))
-        console.log("data.friends : ",data.friends)
-        console.log("chatlistdata : ", chatlistdata)
+        // console.log("data.friends : ",data.friends)
+        // console.log("chatlistdata : ", chatlistdata)
         //console.log('difference : ',difference)
         //let tmp = data.friends.map(i => {return {...i}})
         //let tmp2 = data.friends.map((i)=>{return  [i.friendName, i.lastmsg]})
-        let tmp = []
-        for(let i = 0; i < data.friends.length; ++i){
-          tmp.push([data.friends[i].friendName, data.friends[i].lastmsg.sender.username, data.friends[i].lastmsg.body])
-        }
-        console.log(tmp)
+        // let chatlisttmp = tolist(chatlistdata)
+        // let datatmp = tolist(data.friends)
+        // console.log('chatlisttmp : ', chatlisttmp)
+        // console.log('datatmp : ', datatmp)
+        // let difference = datatmp.filter((i)=>!chatlisttmp.includes(i))
+        // console.log('difference : ',difference)
+        // //console.log(chatlisttmp.includes('789'))
+        // for(let j=0; j < datatmp.length; ++j){
+        //   difference.push(datatmp.filter((i)=>!chatlisttmp[j].includes(i)))
+        // }
         // tmp.forEach(element => {
         //   return {friendName: element.friendName, lastmsg: element.lastmsg}
         // });
@@ -73,7 +84,7 @@ export default ({chatwparticular, setChatwparticular, setChatBoxName, currentUse
                                     }} 
                                     lastActivityTime={<span style={{
                                         color: "teal"
-                                      }}>{format(lastmsg.timestamp)}</span>} unreadDot = {i%2?true:false}>
+                                      }}>{format(lastmsg.timestamp)}</span>} >
                             {/* <Avatar src={null} name={friendName} /> */}
                         </Conversation>)
                         }

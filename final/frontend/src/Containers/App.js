@@ -47,6 +47,7 @@ function App() {
     const [currentUser, setCurrentUser] = useState('123')
     const [inin, setInin] = useState(false)
     const [loginname, setLoginname] = useState('')
+    const [chatboxUnread, setChatboxUnread] = useState({})
 
     const [login, {loading: loginLoading, error: loginError, data: loginData}] = useMutation(LOGIN);
     const [signUp, {loading: signUpLoading, error: signUpError, data: signUpData}] = useMutation(SIGNUP);
