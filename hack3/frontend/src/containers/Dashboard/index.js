@@ -77,6 +77,24 @@ export default function Dashboard() {
 
   // subscription to task deleted
   useEffect(() => {
+    subscribeToMore({
+      document: TASK_DELETED_SUBSCRIPTION,
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data) return prev;
+        const {
+          data: { taskUpdated },
+        } = subscriptionData;
+        return {
+          tasks: prev.tasks.map((task) => {
+            if (task.id !== taskUpdated.id) return task;
+            return {
+              ...task,
+              status: taskUpdated.status,
+            };
+          }),
+        };
+      },
+    });
     // TODO 6.5 subscription logic
   }, [subscribeToMore]);
 
