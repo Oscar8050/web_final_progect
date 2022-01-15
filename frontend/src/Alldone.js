@@ -34,7 +34,8 @@ function Alldone({attr1, attr2, attr3, setAttr1, setAttr2, setAttr3}){
         <div style={{display: 'flex', flexDirection: 'row'}}>
             <Card title={title} style={{ width: '58vw', height: '49vh',backgroundImage: paper,
       backgroundSize: 'cover', fontFamily: 'Cambria, Cochin, Georgia, Times, Times New Roman, serif' , fontSize: 20}} >
-                <div style={{overflowY: 'scroll', height: '38vh'}}>{art}</div>
+                {art == 'Please select threes topic that you are interested in' ? <div style={{height: '38vh'}}>{art}</div> : <div style={{overflowY: 'scroll', height: '38vh'}}>{art}</div>}
+
             </Card>
             <Card title="Tag table" style={{ width: '20vw', height: '35vh', marginLeft: 'auto' }} >
                 <Select defaultValue="Problem to Solve" style={{ width: '15vw' }} onChange={(e) => setAttr1(e.key.value)}>
@@ -73,15 +74,17 @@ function Alldone({attr1, attr2, attr3, setAttr1, setAttr2, setAttr3}){
                         console.log(data);
                         setTitle(data.letters.title);
                         setArt(data.letters.content);
+
+
                     }}}>Search</Button>
             </Card>
 
 
         </div>
-        <div style={{display: 'flex', flexDirection: 'row'}}>
-            <TextArea style={{width: '58vw', height: '30vh'}} showCount maxLength={100} onChange={e => console.log(e)} />
+        <div style={{display: 'flex', flexDirection: 'row', height: '30vh'}}>
+            <TextArea placeholder='Send regards to your new friend' style={{width: '53vw', height: '28vh'}} showCount maxLength={200} onChange={e => console.log(e)} />
 
-            <Button type="dashed" size='large' style={{marginLeft: 'auto'}}>
+            <Button className='reply' type="dashed" size='large' style={{height: '28vh'}}>
                 Send
             </Button>
         </div>

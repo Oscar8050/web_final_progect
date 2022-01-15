@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+::placeholder {
+  font-size: 30px;
+}
+.ant-input {
+  font-size: 30px !important;
+}
