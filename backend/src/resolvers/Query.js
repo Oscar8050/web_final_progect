@@ -37,7 +37,7 @@ const Query = {
         }
         if (!result){
             var tmp = await db.LetterModel.find().limit(10)
-            result = tmp[Math.floor(Math.random() * 10)]
+            result = tmp[Math.floor(Math.random() * tmp.length)]
         }
         return result;
     }

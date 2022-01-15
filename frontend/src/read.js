@@ -7,6 +7,8 @@ import {
 
 function Read_Reply(props) {
 
+
+
     //console.log(props.info)
     const [click, setClick] = useState(0);
 
@@ -16,7 +18,7 @@ function Read_Reply(props) {
     }
 
     var change = (<>
-        {click == 0 ? <Button type="primary" onClick={textedit}>Click to Reply</Button> : <Reply></Reply>}
+        {click == 0 ? <Button type="primary" onClick={textedit}>Click to Reply</Button> : <></>}
     </>
 
     )

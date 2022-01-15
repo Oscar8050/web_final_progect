@@ -4,12 +4,17 @@ import { Input, Space, Tag, Button } from 'antd';
 import { AudioOutlined } from '@ant-design/icons';
 import { useState }  from 'react';
 import './mailbox.css'
+import {GET_LETTERS_QUERY} from "./graphql";
 
 
 
 
 
-function Read_letter(){
+function Choose_letter({setAttr1, setAttr2, setAttr3}){
+
+
+
+
     const { Search } = Input;
     const suffix = (
         <AudioOutlined
@@ -67,4 +72,4 @@ function Read_letter(){
     </div>);
 }
 
-export default Read_letter;
+export default Choose_letter;
