@@ -2,8 +2,10 @@ import uuidv4 from 'uuid/v4';
 import bcrypt from "bcrypt";
 import crypto from "crypto-js";
 import { makeName, checkUser, checkChatBox, newChatBox, checkMessage, checkRelationship, newMessage, newUser,newFriend,updatelastmsg} from './utility';
+
+const saltRounds = 10
 const Mutation = {
-    async login(parent, {username, hashedpassword}, {db, pubsub}, info){
+    async login(parent, {username, password}, {db, pubsub}, info){
         if(!password) 
             return  {status: 'Failed', message: 'Password cannot be empty'};
         const user = await checkUser(db, username, "login");
@@ -11,7 +13,7 @@ const Mutation = {
             return {status: 'Failed', message: `username ${username} doesn't exist`};
         //const inputPassword = crypto.AES.decrypt(password, secretKey).toString(crypto.enc.Utf8);
         //const passwordIsCorrect =  await bcrypt.compare(inputPassword, user.password);
-        if(hashedpassword === user.hashedpassword){
+        if(await bcrypt.compare(password, user.hashedpassword)){
             return {status: 'Success', message: 'Login Success'};
         }else{
             return {status: 'Failed', message: 'Password is incorrect'};
@@ -24,6 +26,7 @@ const Mutation = {
         if(user)
             return {status: 'Failed', message: 'username exists'};
         else{
+            const hashedpassword = await bcrypt.hash(password, saltRounds)
             await newUser(db, username, hashedpassword);
             return {status: 'Success', message: 'User created'};
         }
