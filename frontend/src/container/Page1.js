@@ -80,9 +80,9 @@ var ch = -1;
       backgroundSize: 'cover'
     }}>
       {choice == 0 ? <Cover step={choice} onstep={setChoice} usr={usr}/> : <div/>}
-      {choice == 1 ? <Write_letter step={choice} onstep={setChoice} /> : <div/>}
+      {choice == 1 ? <Write_letter step={choice} onstep={setChoice} usr={usr}/> : <div/>}
       {choice == 2 ? <Push step={choice} onstep={setChoice}/> : <div/>}
-      {choice == 3 ? <Alldone mode={mode} onmode={onmode}/> : <div/>}
+      {choice == 3 ? <Alldone mode={mode} onmode={onmode} usr={usr}/> : <div/>}
       <div style={{ textAlign: 'center', color:"black", fontSize: "2vmin"}}>Designed by J.T. Hsu ©2021 Web programming final</div>
       {backmusic}
       </div>

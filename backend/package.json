@@ -1,25 +1,30 @@
 {
   "name": "backend",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
-  "license": "MIT",
+  "scripts": {
+    "server": "nodemon src/index.js --ext js,graphql --exec babel-node",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.17.2",
-    "nodemon": "^2.0.15"
+    "bcrypt": "^5.0.1",
+    "crypto-js": "^4.1.1",
+    "dotenv-defaults": "^3.0.0",
+    "graphql-yoga": "^1.17.4",
+    "mongoose": "^6.1.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.16.8",
-    "@babel/core": "^7.16.7",
-    "@babel/node": "^7.16.8",
-    "@babel/plugin-proposal-class-properties": "^7.16.7",
-    "@babel/plugin-proposal-object-rest-spread": "^7.16.7",
-    "@babel/plugin-transform-arrow-functions": "^7.16.7",
-    "@babel/preset-env": "^7.16.8",
-    "dotenv-defaults": "^3.0.0",
-    "mongoose": "^6.1.6"
-  },
-"scripts": {
-    "server": "nodemon server.js --ext js --exec babel-node"
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/node": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.9.6",
+    "@babel/plugin-transform-arrow-functions": "^7.8.3",
+    "@babel/preset-env": "^7.9.6",
+    "nodemon": "^2.0.4"
   }
 }

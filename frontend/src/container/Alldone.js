@@ -1,13 +1,15 @@
 import './Page1.css';
-import { render_page1 , render_page2, send_letter } from './axios.js';
+//import { render_page1 , render_page2, send_letter } from './axios.js';
 import { useState , useEffect, useCallback} from 'react';
 import React from 'react';
 import './write_letter.js';
 import 'antd/dist/antd.css';
 import { Layout, Menu, Input, Space, Card, Button, Select } from 'antd';
 import SizeContext from 'antd/lib/config-provider/SizeContext';
+import { TMPATTR, SAVE_ATTRIBUTE,CREATE_LETTER } from '../graphql';
+import { useMutation, useQuery } from '@apollo/client';
 
-function Alldone({mode,onmode}){
+function Alldone({mode,onmode,usr}){
 
     const [art, setArt] = useState("Default content")
     const [title, setTitle] = useState("Default topic")
@@ -15,6 +17,11 @@ function Alldone({mode,onmode}){
     const [attr1, setAttr1] = useState("Problems to solve");
     const [attr2, setAttr2] = useState("None");
     const [attr3, setAttr3] = useState("None");
+    const [update, setUpdate] = useState(false)
+
+    const [saveattribute, {loading: saveattributeLoading, error: saveattributeError, data: saveattributeData}] = useMutation(SAVE_ATTRIBUTE)
+    const [createletter, {loading: createletterLoading, error: createletterError, data: createletterData}] = useMutation(CREATE_LETTER)
+    const {data, refetch} = useQuery(TMPATTR, {variables:{username: usr}, });
 
     const nextmode = useCallback(() => {
         onmode(0);
@@ -33,60 +40,62 @@ function Alldone({mode,onmode}){
     }
 
     const Render_art = async() => {
-        const response = await render_page2();
-        console.log(response)
-        if(response != "fail"){
-            console.log("success render");
-            if(response != "Default content")
-            setArt(response);
-        }
-        else{
-            console.log("Fail render");
-        }
+        
+        const {content} = data.tmpattr;
+        console.log(content)
+        console.log("success render");
+        if(content != "")
+        setArt(content);
+        
     }
 
     const Render_tit = async() => {
-        const response = await render_page1();
-        console.log(response)
-        if(response != "fail"){
-            console.log("success render");
-            if(response["tit"] != "Default title")
-            setTitle(response["tit"]);
-            if(response["tex"] == "Old"){
-                setPaper(`url("https://st.depositphotos.com/2086879/2449/i/950/depositphotos_24493081-stock-photo-old-paper.jpg")`);
-            }
-            else if(response["tex"] == "Simple"){
-                setPaper(`url("https://image.shutterstock.com/mosaic_250/1427210/758024551/stock-photo-old-paper-texture-758024551.jpg")`);
-            }
-            else if(response["tex"] == "Real"){
-                setPaper(`url("https://us.123rf.com/450wm/roystudio/roystudio1509/roystudio150900207/44756396-canvas-texture-background-subtle-dot-pattern-a4-format-paper-texture-background.jpg?ver=6")`);
-            }
+        const {title, texture} = data.tmpattr;
+        console.log("success render");
+        if(title != "")
+        setTitle(title);
+        if(texture == "Old"){
+            setPaper(`url("https://st.depositphotos.com/2086879/2449/i/950/depositphotos_24493081-stock-photo-old-paper.jpg")`);
         }
-        else{
-            console.log("Fail render");
+        else if(texture == "Simple"){
+            setPaper(`url("https://image.shutterstock.com/mosaic_250/1427210/758024551/stock-photo-old-paper-texture-758024551.jpg")`);
         }
+        else if(texture == "Real"){
+            setPaper(`url("https://us.123rf.com/450wm/roystudio/roystudio1509/roystudio150900207/44756396-canvas-texture-background-subtle-dot-pattern-a4-format-paper-texture-background.jpg?ver=6")`);
+        }
+        
+        
     }
 
     const send = async(attr1, attr2, attr3) => {
-        const response = await send_letter(attr1, attr2, attr3);
-        console.log("here");
-        if(response == "success"){
-            alert("send successfully!");
-            nextmode();}
-        else{
-            alert("error!");
-        }
+        await saveattribute({variables:{
+            username:usr,
+            title:data.tmpattr.title,
+            tex:data.tmpattr.texture,
+            content:data.tmpattr.content,
+            art1:attr1,art2:attr2,art3:attr3
+        }})
+        await createletter({variables:{
+            username:usr
+        }})
+        alert("send successfully!");
+        setUpdate(false)
+        nextmode();
+        
     }
 
     const { Option } = Select;
 
     useEffect(() => {
-        Render_art();
+        if(!update){
+            refetch()
+            Render_art();
+            Render_tit();
+            setUpdate(true)
+        }
+        
     }, [])
 
-    useEffect(() => {
-        Render_tit();
-    }, [])
 
     return <div className="final">
         <div style={{display: 'flex', flexDirection: 'column', textAlign: 'left'}}>

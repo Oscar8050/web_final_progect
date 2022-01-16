@@ -1,15 +1,18 @@
 import './Page1.css';
-import { store_page1 , render_page1 } from './axios.js';
+//import { store_page1 , render_page1 } from './axios';
+import { useMutation, useQuery } from '@apollo/client';
 import { useState , useEffect , useCallback} from 'react';
 import React from 'react';
 import './write_letter.js';
 import 'antd/dist/antd.css';
 import { Input, Space, Card, Button } from 'antd';
+import { TMPATTR, SAVE_ATTRIBUTE } from '../graphql';
 
 function Cover({step, onstep, usr}){
 
     const [title, setTitle] = useState("");
     const [texture, setTexture] = useState("");
+    const [update, setUpdate] = useState(false)
 
     /*選取材質的匡線效果 */
     const [b1, setB1] = useState("solid gray 0px");
@@ -18,6 +21,9 @@ function Cover({step, onstep, usr}){
     const [b4, setB4] = useState("solid gray 0px");
     const [b5, setB5] = useState("solid gray 0px");
 
+    const [saveattribute, {loading: saveattributeLoading, error: saveattributeError, data: saveattributeData}] = useMutation(SAVE_ATTRIBUTE)
+    const {data, refetch} = useQuery(TMPATTR, {variables:{username: usr}, });
+
     /*自動跳轉至下一頁 */
     const nextstep = useCallback(() => {
         onstep(1)
@@ -25,54 +31,63 @@ function Cover({step, onstep, usr}){
 
     /*儲存材質和標題 */
     const Save_page1 = async (title, tex, usr) => {
-        const response = await store_page1(title, tex, usr)
-        if(response === "success"){
-            alert("Create successfully!");
-            nextstep();
-        }
-        else{
-            alert("Error, please try again");
-        }
+        console.log(usr)
+        const response = await saveattribute({variables:{
+            username:usr,
+            title:title,
+            tex:tex,
+            content:"",
+            art1:"",
+            art2:"",
+            art3:"",
+        }});
+        alert("Create successfully!");
+        setUpdate(false)
+        nextstep();
+       
+        
     }
 
     /*復原版面 */
     const Render_page1 = async(usr) => {
         /*從後端拿回之前存的資料 */
-        const response = await render_page1(usr);
-        console.log(response)
-        if(response !== "fail"){
-            console.log("success render");
-            if(response["tit"] !== "Default title"){
-                setTitle(response["tit"]);
+        refetch()
+        if(data){
+            console.log("data: ",data.tmpattr)
+            const {title,texture}= data.tmpattr
+            if(title !== ""){
+                setTitle(title);
             }
-            if(response["tex"] !== "Default texture"){
-                setTexture(response["tex"]);
-                if(response["tex"] === "Classic"){
+            if(texture !== ""){
+                setTexture(texture);
+                if(texture === "Classic"){
                     setB1("solid rgb(65, 172, 136) 2px");
                 }
-                else if(response["tex"] === "Old"){
+                else if(texture === "Old"){
                     setB2("solid rgb(65, 172, 136) 2px");
                 }
-                else if(response["tex"] === "Real"){
+                else if(texture === "Real"){
                     setB3("solid rgb(65, 172, 136) 2px");
                 }
-                else if(response["tex"] === "Capsule"){
+                else if(texture === "Capsule"){
                     setB4("solid rgb(65, 172, 136) 2px");
                 }
-                else if(response["tex"] === "Simple"){
+                else if(texture === "Simple"){
                     setB5("solid rgb(65, 172, 136) 2px");
                 }
             }
             console.log({texture, title});
         }
-        else{
-            console.log("Fail render");
-        }
+        
+        
     }
 
     /*載入時自動回覆版面 */
     useEffect(() => {
-        Render_page1();
+        if(!update){
+            Render_page1();
+            setUpdate(true)
+        }   
       }, [])
 
     /*render 畫面 */
@@ -148,7 +163,7 @@ function Cover({step, onstep, usr}){
     <Input placeholder="Title..." allowClear value={title} onChange={(e) => {setTitle(e.target.value)}} />
     <Button style={{background: 'linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c)'}} 
     onClick={() => {
-        Save_page1(title, texture);
+        Save_page1(title, texture,usr);
     }}>Create</Button>
     </div>
     </Card>

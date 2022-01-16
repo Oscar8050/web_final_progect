@@ -1,17 +1,23 @@
 import './Page1.css';
-import { store_page2 , render_page2 } from './axios.js';
+//import { store_page2 , render_page2 } from './axios.js';
 import { useState , useEffect , useCallback} from 'react';
 import React from 'react';
 import 'antd/dist/antd.css';
 import { Layout, Input, Button } from 'antd';
+import { TMPATTR, SAVE_ATTRIBUTE } from '../graphql';
+import { useMutation, useQuery } from '@apollo/client';
+import { DashOutlined } from '@ant-design/icons';
 /* https://ant.design/components/button/ */
 
 const { Header, Content, Footer, Sider } = Layout;
 const { TextArea } = Input;
 
-function Write_letter({step, onstep}){
+function Write_letter({step, onstep, usr}){
 
     const [article, setArticle] = useState("");
+    const [update, setUpdate] = useState(false)
+    const [saveattribute, {loading: saveattributeLoading, error: saveattributeError, data: saveattributeData}] = useMutation(SAVE_ATTRIBUTE)
+    const {data, refetch} = useQuery(TMPATTR, {variables:{username: usr}, });
 
     /*自動切換至下一頁 */
     const nextstep = useCallback(() => {
@@ -20,31 +26,43 @@ function Write_letter({step, onstep}){
 
     /*儲存版面內容 */
     const Save_page2 = async (art) => {
-        const response = await store_page2(art);
-        if(response == "success"){
-            alert("Content saved!");
-            nextstep();
-        }
-        else{
-            alert("Error, please try again");
-        }
+            console.log(data.title)
+            console.log(data.texture)
+        const response = await saveattribute({variables:{
+            username:usr,
+            title:data.tmpattr.title,
+            tex:data.tmpattr.texture,
+            content:art,
+            art1:"",
+            art2:"",
+            art3:"",
+        }});     
+        alert("Content saved!");
+        setUpdate(false)
+        nextstep();
+        
+        
     }
 
     /*復原暫存的版面 */
     const Render_page2 = async() => {
-        const response = await render_page2();
-        if(response != "fail"){
-            if(response != "Default content")
-                setArticle(response);
-        }
+        
+        const {content} = data.tmpattr;
+        if(content !== "")
+            setArticle(content);
+        
         else{
             console.log("render failed");
         }
     }
 
     useEffect(() => {
-        Render_page2();
-      }, [])
+        if(!update){
+            refetch()
+            Render_page2();
+            setUpdate(true)
+        }   
+      })
 
     /*render畫面 */
     var cont = (<div>
