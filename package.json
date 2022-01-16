@@ -9,4 +9,5 @@
       "start": "cd backend && node src/index.js",
       "build": "cd frontend && react-scripts build",
       "start_react": "cd frontend && react-scripts start"
+    }
 }
