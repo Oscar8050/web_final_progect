@@ -1,0 +1,12 @@
+{
+  "name": "web_final_progect",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Oscar8050/web_final_progect.git",
+  "author": "Oscar Peng <oscar5206@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+      "start": "cd backend && node src/index.js",
+      "build": "cd frontend && react-scripts build",
+      "start_react": "cd frontend && react-scripts start"
+}
