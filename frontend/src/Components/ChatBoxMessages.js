@@ -57,7 +57,7 @@ export const ChatBoxMessages = ({username, chatBoxName, chatwparticular}) => {
               <span><Tag color="blue">{sender.username}</Tag></span> 
           </p>
       ):(
-          <p key={i} style={{verticalAlign:'top', wordWrap:'break-word'}}>
+          <p key={i} style={{textAlign:'left',verticalAlign:'top', wordWrap:'break-word'}}>
               <Tag color="blue">{sender.username}</Tag> 
               <span style={{display:'inline-block', width: '350px', margin:'5px'}}>{body}</span> 
           </p>

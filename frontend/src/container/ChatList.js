@@ -67,8 +67,11 @@ export default ({chatwparticular, setChatwparticular, setChatBoxName, currentUse
                     <Avatar src={null} name="Lilly" />
                   </Conversation> */}
                   {console.log(chatlistdata)}
+                  <div className="board">
+                       Chat list:
+                        </div>
                    {
-                    
+                      
                       chatlistdata.map(({friendName, lastmsg},i)=>
                         {
                         return (
@@ -77,7 +80,7 @@ export default ({chatwparticular, setChatwparticular, setChatBoxName, currentUse
                                     info = {lastmsg.body} 
                                     onClick = {() => {
                                         setChatBoxName(makeName(currentUser,friendName))
-                                        setChatwparticular(true)
+                                        setChatwparticular(false)
                                     }} 
                                     lastActivityTime={<span style={{
                                         color: "teal"

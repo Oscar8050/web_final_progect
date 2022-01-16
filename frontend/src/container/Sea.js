@@ -10,10 +10,10 @@ import { Layout, Menu, Input, Space, Card, Button, Select, Tag } from 'antd';
 //import SizeContext from 'antd/lib/config-provider/SizeContext';
 import {GET_LETTERS_QUERY, CREATE_CHATBOX, CREATE_MESSAGE, MAKE_FRIEND} from "../graphql";
 import { ConsoleSqlOutlined } from '@ant-design/icons';
+import music from '../music.mp3'
 
 function handleChange(value) {
     console.log(`selected ${value}`);
-
 }
 
 
@@ -44,15 +44,20 @@ function Alldone({step, setStep, attr1, attr2, attr3, setAttr1, setAttr2, setAtt
         setAttr2("")
         setAttr3("")
         setStep(1)
+        setSeaorbox("")
         return
     }
 
+    const backmusic = (
+        <audio src={music} autoPlay loop/>
+      )
 
     const { Option } = Select;
 
 
-    var show = (<>
-        {step == 1 ?  <Card title="Select topics you are interested in" style={{ width: '24vw', height: '80vh', marginLeft: 'auto', marginRight: 'auto'}} >
+    var show = (<><Layout style={{height:'100vh', width:'100vw' ,backgroundImage: `url("https://eastonialeopards.com/wp-content/uploads/2018/03/casey-900x589.jpg")`,
+    backgroundSize: '100% 100%'}}>
+        {step == 1 ?  <Card title="Select topics" style={{ width: '30vw', height: '70vh', marginLeft: 'auto', marginRight: 'auto', marginTop: '3vh'}} >
             <Select defaultValue="Problem to Solve" style={{ width: '15vw' }} onChange={(e) => {setAttr1(e)}}>
                 <Option value="Problem to Solve">Problem to Solve</Option>
                 <Option value="Sharing Feelings">Sharing Feelings</Option>
@@ -95,28 +100,27 @@ function Alldone({step, setStep, attr1, attr2, attr3, setAttr1, setAttr2, setAtt
                 }}}>Search</Button>
         </Card> : <div className="final">
 
-
+                    <div>
                     <Card title={title} style={{ margin: 'auto', width: '58vw', height: '49vh',backgroundImage: paper,
                         backgroundSize: 'cover', fontFamily: 'Cambria, Cochin, Georgia, Times, Times New Roman, serif' , fontSize: 20}} >
                         {art == 'Please select threes topic that you are interested in' ? <div style={{height: '38vh'}}>{art}</div> : <div style={{overflowY: 'scroll', height: '38vh'}}>{art}</div>}
 
                     </Card>
-                    <TextArea placeholder='Send regards to your new friend' style={{margin: 'auto', width: '58vw', height: '28vh'}} showCount maxLength={200} onChange={e => setMessagetosend(e.target.value)} />
-            <div style={{height: '3vh'}}></div>
-            <div style={{textAlign: 'center'}}>
-                <Button style={{position: 'relative'}} className='reply' type="dashed" danger size='large' onClick={onCancel}>
+                    <div style={{textAlign: 'center'}}>
+                <Button style={{marginTop: '3vh', marginRight:'2vmin'}} className='reply' type="dashed" danger size='large' onClick={onCancel}>
                     Cancel
                 </Button>
-                <Button style={{position: 'relative'}} className='reply' type="dashed" size='large' onClick={()=>{sendOnClick()}}>
+                <Button style={{marginTop: '3vh'}} className='reply' type="dashed" size='large' onClick={()=>{sendOnClick()}}>
                     Send
                 </Button>
             </div>
-
-
-
+                    </div>
+                    <TextArea className="textplace" placeholder='Reply...' style={{marginLeft: '5vw',marginTop: '10vh', width: '58vw', height: '50vh', fontSize: '100px'}} showCount maxLength={200} onChange={e => setMessagetosend(e.target.value)} />
+            <div style={{height: '3vh'}}></div>
         </div>}
+        {backmusic}
+        </Layout>
     </>)
-
     return show
 }
 

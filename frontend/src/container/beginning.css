@@ -6,6 +6,12 @@
   color: azure !important;
 }
 
+.App-logo {
+  height: 17vmin;
+  pointer-events: none;
+  margin-top: -10vh;
+}
+
 .mainpage {
   min-width: 100vw;
   min-height: 100vh;
@@ -53,6 +59,7 @@
   transform: scale(1.05);
 }
 
+
 .ask {
   color: blanchedalmond !important;
 }
@@ -60,3 +67,5 @@
 .ask:hover {
   text-decoration: underline;
 }
+
+

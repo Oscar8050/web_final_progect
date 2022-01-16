@@ -41,7 +41,7 @@ var ch = -1;
         onCollapse={(collapsed, type) => {
           console.log(collapsed, type);
         }}
-        style={{width:'30vw'}}
+        className="sider"
       >
         <div className="logo" >
           <img src={mainlogo} width={100}/>

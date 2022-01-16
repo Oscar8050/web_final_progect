@@ -41,9 +41,15 @@
   font-size: 30px;
 }
 
-.ant-input {
-  font-size: 30px !important;
-}
 .final .ant-card-head-title {
   font-size: 25px;
+}
+
+.textplace .ant-input{
+  margin: auto;
+  font-size: 20px;;
+}
+
+.red{
+  animation: lightup 2s ease;
 }

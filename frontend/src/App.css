@@ -7,9 +7,9 @@
 }
 
 .App-logo {
-  height: 17vmin;
+  height: 17vmin !important;
   pointer-events: none;
-  margin-top: -10vh;
+  margin-top: -10vh !important;
 }
 
 .Begin {
@@ -38,7 +38,7 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 4s linear;
+    animation: App-logo-span infinite 4s linear !important;
   }
 }
 
@@ -98,7 +98,7 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
+@keyframes App-logo-span {
   0% {
     transform: rotate(-10deg);
   }
@@ -109,3 +109,4 @@
     transform: rotate(-10deg);
   }
 }
+

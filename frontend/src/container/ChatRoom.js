@@ -52,7 +52,7 @@ const ChatRoom = (props) => {
         <Title>
             <h1>{anotherUser}</h1>
             <Button type="primary" danger onClick={()=>{   
-                setChatwparticular(false);
+                setChatwparticular(true);
                 setChatBoxName('');
                 change_page();
             }}>

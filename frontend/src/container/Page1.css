@@ -123,7 +123,6 @@
 
 .step2{
   margin-top: 3vh;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .step3{
@@ -175,4 +174,19 @@
 
 .ant-card-head-title{
   font-size: 25px;
+}
+
+input::-webkit-input-placeholder {
+  font-size: 2vh;
+  line-height: 3;
+}
+
+.ant-menu-item{
+  background-color: initial;
+  margin-right: 12vw !important;
+  padding: 5vmin;
+}
+
+.sider{
+  width: 300px !important;
 }

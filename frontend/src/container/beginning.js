@@ -1,4 +1,5 @@
 import logo from '../MSB.png';
+import '../App.css'
 import 'antd/dist/antd.css';
 import music from '../music.mp3'
 import './beginning.css';
@@ -40,6 +41,10 @@ const onFinish = (values) => {
 }
 
 const addacc = async() => {
+  if(checkpass != password){
+    message.error(`Inconsistent password and password confirmation!`);
+    return;
+  }
   const response = await signup({variables:{
     username: account,
     password: password
@@ -96,7 +101,7 @@ const addacc = async() => {
           },
         ]}
       >
-        <Input value={account} onChange={(e)=>{setAccount(e.target.value)}}/>
+        <Input style={{height: '4vh', width: '16vw'}} value={account} onChange={(e)=>{setAccount(e.target.value)}}/>
       </Form.Item>
 
       <Form.Item
@@ -109,7 +114,7 @@ const addacc = async() => {
           },
         ]}
       >
-        <Input.Password value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
+        <Input.Password style={{height: '4vh', width: '16vw'}} value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
       </Form.Item>
 
       <Form.Item
@@ -164,7 +169,7 @@ const addacc = async() => {
       <Form.Item
         label="Username"
         name="username"
-        style={{color: 'white'}}
+        style={{color: 'white', width: '30vw'}}
         rules={[
           {
             required: true,
@@ -172,7 +177,7 @@ const addacc = async() => {
           },
         ]}
       >
-        <Input value={account} onChange={(e)=>{setAccount(e.target.value)}}/>
+        <Input style={{height: '4vh', width: '16vw'}} value={account} onChange={(e)=>{setAccount(e.target.value)}}/>
       </Form.Item>
 
       <Form.Item
@@ -185,7 +190,7 @@ const addacc = async() => {
           },
         ]}
       >
-        <Input.Password value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
+        <Input.Password style={{height: '4vh', width: '16vw'}} value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
       </Form.Item>
 
       <Form.Item
@@ -198,7 +203,7 @@ const addacc = async() => {
           },
         ]}
       >
-        <Input.Password value={checkpass} onChange={(e)=>{setCheckpass(e.target.value)}}/>
+        <Input.Password style={{height: '4vh', width: '16vw'}} value={checkpass} onChange={(e)=>{setCheckpass(e.target.value)}}/>
       </Form.Item>
 
       <Form.Item
@@ -209,6 +214,9 @@ const addacc = async() => {
       >
         <Button type="primary" htmlType="submit" onClick={()=>{addacc()}}>
           Submit
+        </Button>
+        <Button style={{margin: '2vw'}} type="primary" htmlType="back" onClick={()=>{setInit3(0)}}>
+          Back
         </Button>
       </Form.Item>
     </Form>
@@ -223,9 +231,13 @@ const addacc = async() => {
     backgroundSize: 'cover'
   }}>
     <div className="blocks">
-      <div className="block" onClick={()=>{setMode(1);console.log("hi")}} >Write Letter</div>
-      <div className="block" onClick={()=>{setSeaorbox("sea")}}>Explore the Sea</div>
-      <div className="block" onClick={()=>{setSeaorbox("box");setChatwparticular(true)}}>Mail Box</div>
+      <div className="block" style={{backgroundImage: `url("http://srdesign.com.tw/design/data/attachment/forum/201308/07/121344eb4vtdvvegvot1b5.jpg")`,
+    backgroundSize: '108%', opacity:"0.8"}} 
+      onClick={()=>{setMode(1);console.log("hi")}} >Write Letter</div>
+      <div className="block" style={{backgroundImage: `url("https://www.monmouth.edu/magazine/wp-content/uploads/sites/7/2018/06/26-Scuba-Diving-ORLA-ISTOCK-826245986.jpg")`,
+    backgroundSize: '110% 130%', opacity: "0.8"}}  onClick={()=>{setSeaorbox("sea")}}>Explore the Sea</div>
+      <div className="block" style={{backgroundImage: `url("https://photo69.macsc.com/180408/180408_295/x0WRa9R5Eg_small.jpg")`,
+    backgroundSize: '120% 120%', opacity: "0.8"}} onClick={()=>{setSeaorbox("box");setChatwparticular(true)}}>Mail Box</div>
     </div>
     {backmusic}
     </div>

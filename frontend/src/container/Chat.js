@@ -4,6 +4,7 @@ import {message as popUpMessage, Input} from 'antd';
 import styled from 'styled-components';
 import useChat from '../Hooks/useChat';
 import ChatRoom from './ChatRoom';
+import music from '../music.mp3'
 import './Chat.css';
 //import Tabs from './Tab';
 import {
@@ -48,6 +49,10 @@ function App({usr, inin, setInin, chatwparticular, setChatwparticular, setSeaorb
     const [currentUser, setCurrentUser] = useState(usr)
     //const [inin, setInin] = useState(false)
     const [loginname, setLoginname] = useState('')
+
+    const backmusic = (
+        <audio src={music} autoPlay loop/>
+      )
 
     const [login, {loading: loginLoading, error: loginError, data: loginData}] = useMutation(LOGIN);
     const [signUp, {loading: signUpLoading, error: signUpError, data: signUpData}] = useMutation(SIGNUP);
@@ -144,12 +149,13 @@ function App({usr, inin, setInin, chatwparticular, setChatwparticular, setSeaorb
                 setCurrentUser(loginname)
             }}
         ></Input.Search>: */}
-            {    !chatwparticular?
+            {    chatwparticular?
                 <ChatList setSeaorbox = {setSeaorbox} chatlistdata = {chatlistdata} setChatlistdata = {setChatlistdata} chatwparticular = {chatwparticular} setChatwparticular = {setChatwparticular} setChatBoxName = {setChatBoxName} currentUser = {currentUser}/>:
                 <ChatRoom chatwparticular = {chatwparticular} setChatlistdata = {setChatlistdata} setChatwparticular = {setChatwparticular} sendMessage = {sendMessage} username = {currentUser} body = {body} setBody = {setBody} displayStatus = {displayStatus}
                 chatBoxName = {chatBoxName} setChatBoxName = {setChatBoxName}
                 />
             }
+        {backmusic}
         </div>
     )
 }
